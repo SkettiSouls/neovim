@@ -1,7 +1,3 @@
-" Rebindings
-nnoremap o o<esc>
-nnoremap O O<esc>
-
 " Switch windows with arrow keys
 nnoremap <C-left> <C-w>h
 nnoremap <C-down> <C-w>j
@@ -29,7 +25,3 @@ nnoremap <silent><A-l> :vertical resize +2<CR>
 " Shortcuts
 nnoremap <C-w> <esc>:w<CR>
 inoremap <C-w> <esc>:w<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
-
-
-

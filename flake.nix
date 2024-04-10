@@ -11,12 +11,14 @@
       eachSystem = nixpkgs.lib.genAttrs (import systems);
 
       luaInputs = [
+        "lspconfig.lua"
       ];
 
       vimInputs = [
         "keys.vim"
         "rice.vim"
         "ranger.vim"
+        "suda.vim"
       ];
     in
     {
