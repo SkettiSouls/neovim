@@ -7,30 +7,36 @@ let
 in
 with vimPlugins; [
   ### Ricing ###
-  fidget-nvim # possibly shit idfk
-  vim-airline # Vim bar
-  vim-airline-clock # Adds time to airline
-  vim-startify # Start screen
-  nvim-colorizer-lua # ???
-  nvim-web-devicons # Dev Icons
+  fidget-nvim           # possibly shit idfk
+  vim-airline           # Vim bar
+  vim-airline-clock     # Adds time to airline
+  vim-startify          # Start screen
+  nvim-colorizer-lua    # ???
+  nvim-web-devicons     # Dev Icons
 
   ### Workflow ###
-  vim-surround # Keybinds for quickly changing surroundings
-  auto-pairs # Autopairs for '(' '[' '{'
-  #vim-commentary # Commenting keybinds
-  comment-nvim # Commenting keybinds but lua
-  vim-repeat # Allows for repeating plugin binds
-  vim-highlightedyank # Highlights yanked region
-  rnvimr # Ranger inside of nvim
-  suda-vim # Sudo password inside nvim
+  vim-surround          # Keybinds for quickly changing surroundings
+  auto-pairs            # Autopairs for '(' '[' '{'
+  comment-nvim          # Commenting keybinds but lua
+  vim-repeat            # Allows for repeating plugin binds
+  vim-highlightedyank   # Highlights yanked region
+  rnvimr                # Ranger inside of nvim
+  suda-vim              # Sudo password inside nvim
+  plenary-nvim          # Some lua shit required by telescope
   telescope-nvim
   telescope-fzf-native-nvim
-  plenary-nvim # Some lua shit required by telescope
 
   ### Coding ###
-  nvim-lspconfig # Nvim lsp
-  coq_nvim # Completion
-  nvim-treesitter.withAllGrammars # Treeshitter
-  yuck-vim # Yuck syntax highlighting
+  nvim-lspconfig        # Nvim lsp
+  nvim-cmp              # Completion
+  cmp-nvim-lsp          # Cmp source for nvim-lsp
+  cmp-buffer            # Cmp source for buffer words
+  cmp-path              # Cmp source for path
+  cmp-cmdline           # Cmp source for vim cmd
+  vim-vsnip             # Snippet engine
+  cmp-vsnip             # Cmp source for snippets
+  #coq_nvim              # Completion
+  yuck-vim              # Yuck syntax highlighting
   vim-nix
+  nvim-treesitter.withAllGrammars
 ]

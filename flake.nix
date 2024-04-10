@@ -12,6 +12,8 @@
 
       luaInputs = [
         "lspconfig.lua"
+        "comment.lua"
+        "cmp.lua"
       ];
 
       vimInputs = [
