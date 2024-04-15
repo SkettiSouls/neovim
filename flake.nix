@@ -14,10 +14,11 @@
         "comment.lua"
         "cmp.lua"
         "guess-indent.lua"
+        "keys.lua"
+        "auto-pairs.lua"
       ];
 
       vimInputs = [
-        "keys.vim"
         "rice.vim"
         "ranger.vim"
         "suda.vim"
