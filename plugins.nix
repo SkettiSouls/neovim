@@ -23,6 +23,7 @@ with vimPlugins; [
   rnvimr                # Ranger inside of nvim
   suda-vim              # Sudo password inside nvim
   plenary-nvim          # Some lua shit required by telescope
+  guess-indent-nvim     # Tries to guess indent (shocking)
   telescope-nvim
   telescope-fzf-native-nvim
 

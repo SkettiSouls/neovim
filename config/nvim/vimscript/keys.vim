@@ -1,3 +1,8 @@
+" Prevent taking comments with new-line
+" Lowkey sorta cursed, looking for a better method
+"nnoremap o o<esc>0Dky^jPA
+"nnoremap O O<esc>0Djy^kPA
+
 " Switch windows with arrow keys
 nnoremap <C-left> <C-w>h
 nnoremap <C-down> <C-w>j

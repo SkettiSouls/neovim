@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    rust-overlay.url = "github:oxalica/rust-overlay";
     systems.url = "github:nix-systems/default";
   };
 
@@ -14,6 +13,7 @@
         "lspconfig.lua"
         "comment.lua"
         "cmp.lua"
+        "guess-indent.lua"
       ];
 
       vimInputs = [
@@ -39,9 +39,6 @@
 
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [
-              rust-overlay.overlays.default
-            ];
           };
 
           neovimConfigs = callPackage ./config { };
