@@ -13,6 +13,7 @@ with vimPlugins; [
   vim-startify          # Start screen
   nvim-colorizer-lua    # ???
   nvim-web-devicons     # Dev Icons
+  lspkind-nvim          # Completion Icons
 
   ### Workflow ###
   vim-surround          # Keybinds for quickly changing surroundings
@@ -36,7 +37,7 @@ with vimPlugins; [
   cmp-cmdline           # Cmp source for vim cmd
   vim-vsnip             # Snippet engine
   cmp-vsnip             # Cmp source for snippets
-  #coq_nvim              # Completion
+  hover-nvim            # Hover framework
   yuck-vim              # Yuck syntax highlighting
   vim-nix
   nvim-treesitter.withAllGrammars
