@@ -17,12 +17,11 @@
         "keys.lua"
         "auto-pairs.lua"
         "ranger.lua"
+        "suda.lua"
+        "rules.lua"
       ];
 
-      vimInputs = [
-        "rice.vim"
-        "suda.vim"
-      ];
+      vimInputs = [ ];
     in
     {
       packages = eachSystem (system:
