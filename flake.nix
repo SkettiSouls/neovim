@@ -16,11 +16,11 @@
         "guess-indent.lua"
         "keys.lua"
         "auto-pairs.lua"
+        "ranger.lua"
       ];
 
       vimInputs = [
         "rice.vim"
-        "ranger.vim"
         "suda.vim"
       ];
     in

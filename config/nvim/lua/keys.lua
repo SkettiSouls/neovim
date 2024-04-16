@@ -11,16 +11,16 @@ vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
 
 -- Resize windows with alt+arrow keys
-vim.keymap.set ('n', '<a-left>', '<cmd>vertical resize -2<cr>', { noremap = true, silent = true })
-vim.keymap.set ('n', '<a-down>', '<cmd>resize +2<cr>', { noremap = true, silent = true })
-vim.keymap.set ('n', '<a-up>', '<cmd>resize -2<cr>', { noremap = true, silent = true })
-vim.keymap.set ('n', '<a-right>', '<cmd>vertical resize +2<cr>', { noremap = true, silent = true })
+vim.keymap.set ('n', '<A-left>', '<Cmd>vertical resize -2<CR>', { noremap = true, silent = true })
+vim.keymap.set ('n', '<A-down>', '<Cmd>resize +2<CR>', { noremap = true, silent = true })
+vim.keymap.set ('n', '<A-up>', '<Cmd>resize -2<CR>', { noremap = true, silent = true })
+vim.keymap.set ('n', '<A-right>', '<Cmd>vertical resize +2<CR>', { noremap = true, silent = true })
 
 -- Resize windows with alt+vim keys
-vim.keymap.set ('n', '<a-h>', '<cmd>vertical resize -2<cr>', { noremap = true, silent = true })
-vim.keymap.set ('n', '<a-j>', '<cmd>resize +2<cr>', { noremap = true, silent = true })
-vim.keymap.set ('n', '<a-k>', '<cmd>resize -2<cr>', { noremap = true, silent = true })
-vim.keymap.set ('n', '<a-l>', '<cmd>vertical resize +2<cr>', { noremap = true, silent = true })
+vim.keymap.set ('n', '<A-h>', '<Cmd>vertical resize -2<CR>', { noremap = true, silent = true })
+vim.keymap.set ('n', '<A-j>', '<Cmd>resize +2<CR>', { noremap = true, silent = true })
+vim.keymap.set ('n', '<A-k>', '<Cmd>resize -2<CR>', { noremap = true, silent = true })
+vim.keymap.set ('n', '<A-l>', '<Cmd>vertical resize +2<CR>', { noremap = true, silent = true })
 
 -- Save current buffer
 vim.keymap.set ('n', '<leader>w', '<Cmd>w<CR>', { noremap = true, silent = true })
