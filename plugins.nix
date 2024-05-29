@@ -41,4 +41,5 @@ with vimPlugins; [
   yuck-vim              # Yuck syntax highlighting
   vim-nix
   nvim-treesitter.withAllGrammars
+  markdown-preview-nvim
 ]
