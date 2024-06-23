@@ -22,7 +22,7 @@ with vimPlugins; [
   vim-repeat            # Allows for repeating plugin binds
   vim-highlightedyank   # Highlights yanked region
   rnvimr                # Ranger inside of nvim
-  suda-vim              # Sudo password inside nvim
+  vim-suda              # Sudo password inside nvim
   plenary-nvim          # Some lua shit required by telescope
   guess-indent-nvim     # Tries to guess indent (shocking)
   telescope-nvim
