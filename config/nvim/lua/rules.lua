@@ -11,3 +11,6 @@ vim.go.softtabstop = -1
 
 -- Set neovim to send all copied text to the plus buffer. (i.e. delete or yank)
 vim.go.clipboard = "unnamedplus"
+
+-- Set fold method to marker ( default: {{{  }}} )
+vim.go.foldmethod = "marker"
