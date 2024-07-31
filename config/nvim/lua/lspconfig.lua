@@ -20,3 +20,7 @@ lspconfig.html.setup ({
 lspconfig.cssls.setup ({
 	capabilities = capabilities,
 })
+
+lspconfig.pyright.setup ({
+	capabilities = capabilities,
+})

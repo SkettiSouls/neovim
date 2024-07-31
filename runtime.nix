@@ -5,10 +5,11 @@
 , lazygit
 , libqalculate
 , nil
+, pyright
+, ranger
 , ripgrep
 , rust-analyzer
 , tree-sitter
-, ranger
 }:
 [
   clang-tools
@@ -18,8 +19,9 @@
   lazygit
   libqalculate
   nil
+  pyright
+  ranger
   ripgrep
   rust-analyzer
   tree-sitter
-  ranger
 ]
