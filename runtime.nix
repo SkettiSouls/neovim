@@ -1,25 +1,10 @@
-{ clang-tools
-, fzf
-, gcc
-, git
-, lazygit
-, libqalculate
-, nil
-, ripgrep
-, rust-analyzer
-, tree-sitter
-, ranger
-}:
-[
-  clang-tools
+{ pkgs }:
+with pkgs; [
   fzf
-  gcc
   git
   lazygit
-  libqalculate
   nil
-  ripgrep
-  rust-analyzer
-  tree-sitter
   ranger
+  ripgrep
+  tree-sitter
 ]
