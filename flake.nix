@@ -13,6 +13,7 @@
         "lspconfig.lua"
         "comment.lua"
         "cmp.lua"
+        "treesitter.lua"
         "guess-indent.lua"
         "keys.lua"
         "auto-pairs.lua"
