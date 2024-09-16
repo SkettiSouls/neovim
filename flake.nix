@@ -19,6 +19,7 @@
         "ranger.lua"
         "rules.lua"
         "suda.lua"
+        "telescope.lua"
         "term.lua"
         "treesitter.lua"
       ];
