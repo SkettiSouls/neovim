@@ -19,6 +19,7 @@
         "ranger.lua"
         "suda.lua"
         "rules.lua"
+        "term.lua"
       ];
 
       vimInputs = [ ];

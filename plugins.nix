@@ -16,17 +16,18 @@ with vimPlugins; [
   lspkind-nvim          # Completion Icons
 
   ### Workflow ###
-  vim-surround          # Keybinds for quickly changing surroundings
   auto-pairs            # Autopairs for '(' '[' '{'
   comment-nvim          # Commenting keybinds but lua
-  vim-repeat            # Allows for repeating plugin binds
-  vim-highlightedyank   # Highlights yanked region
-  rnvimr                # Ranger inside of nvim
-  vim-suda              # Sudo password inside nvim
-  plenary-nvim          # Some lua shit required by telescope
   guess-indent-nvim     # Tries to guess indent (shocking)
-  telescope-nvim
+  plenary-nvim          # Some lua shit required by telescope
+  rnvimr                # Ranger inside of nvim
   telescope-fzf-native-nvim
+  telescope-nvim
+  toggleterm-nvim
+  vim-highlightedyank   # Highlights yanked region
+  vim-repeat            # Allows for repeating plugin binds
+  vim-suda              # Sudo password inside nvim
+  vim-surround          # Keybinds for quickly changing surroundings
 
   ### Coding ###
   nvim-lspconfig        # Nvim lsp
