@@ -1,22 +1,8 @@
 local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local cmp_setup = { capabilities = capabilities, }
 
-lspconfig.clangd.setup ({
-	capabilities = capabilities,
-})
-
-lspconfig.nil_ls.setup ({
-	capabilities = capabilities,
-})
-
-lspconfig.rust_analyzer.setup ({
-	capabilities = capabilities,
-})
-
-lspconfig.html.setup ({
-	capabilities = capabilities,
-})
-
-lspconfig.cssls.setup ({
-	capabilities = capabilities,
-})
+lspconfig.nil_ls.setup(cmp_setup)
+lspconfig.rust_analyzer.setup(cmp_setup)
+lspconfig.html.setup(cmp_setup)
+lspconfig.cssls.setup(cmp_setup)

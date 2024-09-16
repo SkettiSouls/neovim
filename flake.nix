@@ -10,17 +10,17 @@
       eachSystem = nixpkgs.lib.genAttrs (import systems);
 
       luaInputs = [
-        "lspconfig.lua"
-        "comment.lua"
+        "auto-pairs.lua"
         "cmp.lua"
-        "treesitter.lua"
+        "comment.lua"
         "guess-indent.lua"
         "keys.lua"
-        "auto-pairs.lua"
+        "lspconfig.lua"
         "ranger.lua"
-        "suda.lua"
         "rules.lua"
+        "suda.lua"
         "term.lua"
+        "treesitter.lua"
       ];
 
       vimInputs = [ ];
@@ -72,4 +72,3 @@
       });
     };
 }
-

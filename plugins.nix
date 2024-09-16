@@ -37,7 +37,6 @@ with vimPlugins; [
   cmp-cmdline                        # Cmp source for vim cmd
   cmp-vsnip                          # Cmp source for snippets
   vim-vsnip                          # Snippet engine
-  hover-nvim                         # Hover framework
   yuck-vim                           # Yuck syntax highlighting
   vim-nix                            # Nix niceties (i.e. indention)
   markdown-preview-nvim              # Markdown preview in a browser tab

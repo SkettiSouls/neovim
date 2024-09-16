@@ -6,6 +6,7 @@ vim.wo.relativenumber = true
 vim.go.autoindent = true
 vim.go.autoread = true
 vim.go.smarttab = true
+vim.o.expandtab = false
 vim.go.shiftwidth = 2
 vim.go.softtabstop = -1
 
