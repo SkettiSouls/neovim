@@ -16,6 +16,6 @@ vim.g.rnvimr_shadow_winblend = 100
 vim.g.rnvimr_hide_gitignore = 0
 
 -- Keybinds
-vim.keymap.set('n', '<leader>f', '<cmd>RnvimrToggle<cr>', { noremap = true, silent = true })
-vim.keymap.set('v', '<leader>f', '<esc><cmd>RnvimrToggle<cr>', { noremap = true, silent = true })
-vim.keymap.set('i', '<leader>f', '<esc><cmd>RnvimrToggle<cr>', { noremap = true, silent = true })
+bind('n', '<leader>f', '<cmd>RnvimrToggle<cr>', { noremap = true, silent = true })
+bind('v', '<leader>f', '<esc><cmd>RnvimrToggle<cr>', { noremap = true, silent = true })
+bind('i', '<leader>f', '<esc><cmd>RnvimrToggle<cr>', { noremap = true, silent = true })
