@@ -11,6 +11,7 @@
 
       luaInputs = [
         "auto-pairs.lua"
+        "bar.lua"
         "cmp.lua"
         "comment.lua"
         "guess-indent.lua"

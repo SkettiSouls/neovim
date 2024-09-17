@@ -7,8 +7,7 @@ let
 in
 with vimPlugins; [
   ### Ricing ###
-  vim-airline                        # Vim bar
-  vim-airline-clock                  # Adds time to airline
+  lualine-nvim
   vim-startify                       # Start screen
   lspkind-nvim                       # Completion Type Icons
   nvim-web-devicons                  # Dev Icons
@@ -40,4 +39,16 @@ with vimPlugins; [
   yuck-vim                           # Yuck syntax highlighting
   vim-nix                            # Nix niceties (i.e. indention)
   markdown-preview-nvim              # Markdown preview in a browser tab
+
+  # Lualine clock
+  (buildVimPlugin {
+    pname = "lualine-time";
+    version = "2024-03-04";
+    src = fetchFromGitHub {
+      owner = "archibate";
+      repo = "lualine-time";
+      rev = "71e368674ec59279e8429504074b15fecd758ea8";
+      hash = "sha256-5vZVku4btbwGaPPev+bkWG4R7hLavP5ixN4v/FyJb4c=";
+    };
+  })
 ]
