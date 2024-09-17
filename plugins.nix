@@ -26,6 +26,7 @@ with vimPlugins; [
   plenary-nvim                       # Treesitter dep
   telescope-fzf-native-nvim          # Telescope's fzf rewrite
   telescope-nvim                     # NVim search engine
+  direnv-vim                         # Direnv integration
 
   ### Coding ###
   nvim-lspconfig                     # Nvim lsp
