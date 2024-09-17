@@ -1,4 +1,4 @@
-bind=vim.keymap.set
+bind = vim.keymap.set
 
 -- Switch windows with Ctrl+arrow keys
 bind('n', '<C-left>', '<C-w>h', { noremap = true })
@@ -29,3 +29,6 @@ bind('n', '<leader>w', '<Cmd>w<CR>', { noremap = true, silent = true })
 
 -- Remove highlights
 bind('n', '<leader>h', '<Cmd>noh<CR>', { noremap = true, silent = true })
+
+-- Chdir to current file's directory
+bind('n', 'cd', '<Cmd>cd %:h<CR>', { silent = true })
