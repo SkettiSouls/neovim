@@ -4,7 +4,7 @@ with pkgs; [
   git
   lazygit
   nil
-  ranger
   ripgrep
   tree-sitter
+  yazi
 ]

@@ -10,14 +10,15 @@
       eachSystem = nixpkgs.lib.genAttrs (import systems);
 
       luaInputs = [
+        "global.lua"
         "auto-pairs.lua"
         "bar.lua"
         "cmp.lua"
         "comment.lua"
+        "file-manager.lua"
         "guess-indent.lua"
         "keys.lua"
         "lspconfig.lua"
-        "ranger.lua"
         "rules.lua"
         "suda.lua"
         "telescope.lua"

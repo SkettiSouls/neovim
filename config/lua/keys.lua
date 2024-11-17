@@ -1,5 +1,3 @@
-bind = vim.keymap.set
-
 -- Switch windows with Ctrl+arrow keys
 bind('n', '<C-left>', '<C-w>h', { noremap = true })
 bind('n', '<C-down>', '<C-w>j', { noremap = true })

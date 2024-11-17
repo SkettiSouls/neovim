@@ -17,7 +17,6 @@ with vimPlugins; [
   auto-pairs                         # Autopairs for '(' '[' '{'
   guess-indent-nvim                  # Indention correction
   comment-nvim                       # Commenting keybinds
-  rnvimr                             # Ranger inside of nvim
   toggleterm-nvim                    # Better terminal
   vim-highlightedyank                # Highlights yanked region
   vim-repeat                         # Allows for repeating plugin binds
@@ -50,6 +49,17 @@ with vimPlugins; [
       repo = "lualine-time";
       rev = "71e368674ec59279e8429504074b15fecd758ea8";
       hash = "sha256-5vZVku4btbwGaPPev+bkWG4R7hLavP5ixN4v/FyJb4c=";
+    };
+  })
+
+  (buildVimPlugin {
+    pname = "tfm-nvim";
+    version = "2024-04-23";
+    src = fetchFromGitHub {
+      owner = "Rolv-Apneseth";
+      repo = "tfm.nvim";
+      rev = "fb0de2c96bf303216ac5d91ce9bdb7f430030f8b";
+      hash = "sha256-LiIPVNFEbbkCmqTU+fD23xtTVTIkf6Z5zb+E4Xuz9ps=";
     };
   })
 ]
