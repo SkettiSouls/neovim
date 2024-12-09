@@ -9,11 +9,9 @@ local function setup_lsps(list)
 end
 
 setup_lsps({
-  "nil_ls",
-  "rust_analyzer",
-  "html",
-  "cssls",
   "gopls",
-  "zls",
-  "nushell"
+  "hls",
+  "nil_ls",
+  "nushell",
+  "rust_analyzer",
 })
