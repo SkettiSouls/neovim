@@ -6,7 +6,7 @@ let
   inherit (vimUtils) buildVimPlugin;
 in
 with vimPlugins; [
-  ### Ricing ###
+  ### Rice ###
   lualine-nvim
   vim-startify                       # Start screen
   lspkind-nvim                       # Completion Type Icons
@@ -26,6 +26,7 @@ with vimPlugins; [
   telescope-fzf-native-nvim          # Telescope's fzf rewrite
   telescope-nvim                     # NVim search engine
   direnv-vim                         # Direnv integration
+  oil-nvim                           # Buffer like file management (mega based)
 
   ### Coding ###
   nvim-lspconfig                     # Nvim lsp
@@ -49,17 +50,6 @@ with vimPlugins; [
       repo = "lualine-time";
       rev = "71e368674ec59279e8429504074b15fecd758ea8";
       hash = "sha256-5vZVku4btbwGaPPev+bkWG4R7hLavP5ixN4v/FyJb4c=";
-    };
-  })
-
-  (buildVimPlugin {
-    pname = "tfm-nvim";
-    version = "2024-04-23";
-    src = fetchFromGitHub {
-      owner = "Rolv-Apneseth";
-      repo = "tfm.nvim";
-      rev = "fb0de2c96bf303216ac5d91ce9bdb7f430030f8b";
-      hash = "sha256-LiIPVNFEbbkCmqTU+fD23xtTVTIkf6Z5zb+E4Xuz9ps=";
     };
   })
 ]
