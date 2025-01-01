@@ -1,5 +1,6 @@
 local oil = require('oil')
 local actions = require('oil.actions')
+local telescope = require('telescope.builtin')
 local origin = "" -- Needed for `cd` keybind
 
 bind('n', '-', "<cmd>Oil<cr>")
@@ -30,6 +31,18 @@ oil.setup({
         actions.open_cwd.callback()
         origin = ""
       end
+    end,
+
+    -- Telescope
+    ["ff"] = function()
+      telescope.find_files({ cwd = oil.get_current_dir() })
+    end,
+
+    ["fg"] = function()
+      telescope.grep_string({
+        cwd = oil.get_current_dir(),
+        search = "",
+      })
     end,
   },
 })
