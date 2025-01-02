@@ -1,5 +1,6 @@
 -- Set up nvim-cmp.
 local cmp = require'cmp'
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local lspkind = require('lspkind')
 
 cmp.setup({
@@ -58,3 +59,9 @@ cmp.setup.filetype('gitcommit', {
     { name = 'buffer' },
   })
 })
+
+-- Insert `()` pair after selecting functions.
+cmp.event:on{
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+}

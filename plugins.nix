@@ -15,7 +15,7 @@ with vimPlugins; [
   image-nvim                         # Render images in neovim
 
   ### Workflow ###
-  auto-pairs                         # Autopairs for '(' '[' '{'
+  nvim-autopairs                     # Autopairs for '(' '[' '{'
   guess-indent-nvim                  # Indention correction
   comment-nvim                       # Commenting keybinds
   toggleterm-nvim                    # Better terminal
