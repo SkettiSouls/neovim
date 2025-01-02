@@ -6,5 +6,5 @@ with pkgs; [
   nil
   ripgrep
   tree-sitter
-  yazi
+  imagemagick
 ]

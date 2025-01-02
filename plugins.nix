@@ -12,6 +12,7 @@ with vimPlugins; [
   lspkind-nvim                       # Completion Type Icons
   nvim-web-devicons                  # Dev Icons
   nvim-treesitter.withAllGrammars    # Better highlighting
+  image-nvim                         # Render images in neovim
 
   ### Workflow ###
   auto-pairs                         # Autopairs for '(' '[' '{'
@@ -50,6 +51,18 @@ with vimPlugins; [
       repo = "lualine-time";
       rev = "71e368674ec59279e8429504074b15fecd758ea8";
       hash = "sha256-5vZVku4btbwGaPPev+bkWG4R7hLavP5ixN4v/FyJb4c=";
+    };
+  })
+
+  # Render markdown in neovim
+  (buildVimPlugin {
+    pname = "render-markdown-nvim";
+    version = "2024-12-29";
+    src = fetchFromGitHub {
+      owner = "MeanderingProgrammer";
+      repo = "render-markdown.nvim";
+      rev = "6fbd1491abc104409f119685de5353c35c97c005";
+      hash = "sha256-ncFqBv0JITX3pTsLON+HctLUaKXhLRMBUrRWmI8KOSA=";
     };
   })
 ]
