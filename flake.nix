@@ -9,28 +9,13 @@
     let
       eachSystem = nixpkgs.lib.genAttrs (import systems);
 
+      # We add all other files to a singleton list to ensure global.lua is loaded before all other files
       luaInputs = [
         "global.lua"
-        "auto-pairs.lua"
-        "bar.lua"
-        "cmp.lua"
-        "comment.lua"
-        "file-manager.lua"
-        "guess-indent.lua"
-        "images.lua"
-        "keys.lua"
-        "lspconfig.lua"
-        "markdown.lua"
-        "rules.lua"
-        "suda.lua"
-        "telescope.lua"
-        "term.lua"
-        "treesitter.lua"
-      ];
+      ] ++ (with builtins; filter (n: n != "global.lua") (attrNames (readDir ./config/lua)));
 
-      vimInputs = [ ];
-    in
-    {
+      vimInputs = [];
+    in {
       packages = eachSystem (system:
         let
           inherit (pkgs)
@@ -40,13 +25,9 @@
             writeShellApplication
             ;
 
-          inherit (pkgs.lib)
-            concatStringsSep
-            ;
+          inherit (pkgs.lib) concatStringsSep;
 
-          pkgs = import nixpkgs {
-            inherit system;
-          };
+          pkgs = import nixpkgs { inherit system; };
 
           neovimConfigs = callPackage ./config { };
           neovimPlugins = callPackage ./plugins.nix { };
@@ -65,15 +46,15 @@
               packages.all.start = neovimPlugins;
             };
           };
-        in
-        {
-        default = writeShellApplication {
-          name = "nvim";
-          runtimeInputs = neovimRuntime;
-          text = ''
-            ${neovimWrapped}/bin/nvim "$@"
-          '';
-        };
-      });
+        in {
+          default = writeShellApplication {
+            name = "nvim";
+            runtimeInputs = neovimRuntime;
+            text = ''
+              ${neovimWrapped}/bin/nvim "$@"
+            '';
+          };
+        }
+      );
     };
 }

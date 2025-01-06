@@ -7,29 +7,28 @@ let
 in
 with vimPlugins; [
   ### Rice ###
-  lualine-nvim
+  lualine-nvim                       # Status bar
   vim-startify                       # Start screen
   lspkind-nvim                       # Completion Type Icons
   nvim-web-devicons                  # Dev Icons
-  nvim-treesitter.withAllGrammars    # Better highlighting
   image-nvim                         # Render images in neovim
 
   ### Workflow ###
+  oil-nvim                           # Buffer like file management (mega based)
+  direnv-vim                         # Direnv integration
   nvim-autopairs                     # Autopairs for '(' '[' '{'
-  guess-indent-nvim                  # Indention correction
   comment-nvim                       # Commenting keybinds
   toggleterm-nvim                    # Better terminal
   vim-highlightedyank                # Highlights yanked region
   vim-repeat                         # Allows for repeating plugin binds
   vim-suda                           # Sudo password inside nvim
   vim-surround                       # Keybinds for quickly changing surroundings
-  plenary-nvim                       # Treesitter dep
-  telescope-fzf-native-nvim          # Telescope's fzf rewrite
+  plenary-nvim                       # Dependency for a few things (lib)
   telescope-nvim                     # NVim search engine
-  direnv-vim                         # Direnv integration
-  oil-nvim                           # Buffer like file management (mega based)
+  telescope-fzf-native-nvim          # Telescope's fzf rewrite
+  markdown-preview-nvim              # Markdown preview in a browser tab
 
-  ### Coding ###
+  ### LSP ###
   nvim-lspconfig                     # Nvim lsp
   nvim-cmp                           # Completion
   cmp-nvim-lsp                       # Cmp source for nvim-lsp
@@ -40,7 +39,7 @@ with vimPlugins; [
   vim-vsnip                          # Snippet engine
   yuck-vim                           # Yuck syntax highlighting
   vim-nix                            # Nix niceties (i.e. indention)
-  markdown-preview-nvim              # Markdown preview in a browser tab
+  nvim-treesitter.withAllGrammars    # Whatever treeshitter does man idk
 
   # Lualine clock
   (buildVimPlugin {
