@@ -15,3 +15,6 @@ vim.go.clipboard = "unnamedplus"
 
 -- Enable automatic folding
 vim.opt.foldmethod = "marker"
+
+-- Always vsplit to the right
+vim.opt.splitright = true
