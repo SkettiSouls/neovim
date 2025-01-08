@@ -36,3 +36,24 @@ local function print_table(table)-- {{{
 end
 flake.lib.print_table = print_table
 -- }}}
+
+local function get_buf_table()-- {{{
+  local buf_table = {}
+  for _, i in pairs(vim.api.nvim_list_bufs()) do
+    local buf_name = vim.api.nvim_buf_get_name(i)
+    buf_table[buf_name] = i
+  end
+  return buf_table
+end
+flake.lib.get_buf_table = get_buf_table-- }}}
+
+local function get_win_table()-- {{{
+  local win_table = {}
+  for _, win in pairs(vim.api.nvim_list_wins()) do
+    local win_buf = vim.api.nvim_win_get_buf(win)
+    local win_buf_name = vim.api.nvim_buf_get_name(win_buf)
+    win_table[win_buf_name] = win
+  end
+  return win_table
+end
+flake.lib.get_win_table = get_win_table-- }}}
