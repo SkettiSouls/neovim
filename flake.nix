@@ -28,10 +28,10 @@
             (with builtins; attrNames (readDir ./config/${lang}/${dir}))
             ;
 
-        luaConfigs = source "lua" "config";
-        luaLibs = source "lua" "lib";
+        luaDirs = with builtins; attrNames (nixpkgs.lib.filterAttrs (_: v: v == "directory") (readDir ./config/lua));
+        luaFiles = nixpkgs.lib.flatten (map (dir: source "lua" dir) luaDirs);
         # Load global.lua before all other files
-        luaInputs = (resolvePaths "${neovimConfigs}/lua" [ "global.lua" ]) ++ luaLibs ++ luaConfigs;
+        luaInputs = (resolvePaths "${neovimConfigs}/lua" [ "global.lua" ]) ++ luaFiles;
 
         vimInputs = [];
 
