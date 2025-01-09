@@ -2,13 +2,8 @@
 vim.wo.number = true
 vim.wo.relativenumber = true
 
--- Set default tab spacing to 2.
-vim.go.autoindent = true
+-- Autos
 vim.go.autoread = true
-vim.go.smarttab = true
-vim.o.expandtab = false
-vim.go.shiftwidth = 2
-vim.go.softtabstop = -1
 
 -- Set neovim to send all copied text to the plus buffer. (i.e. delete or yank)
 vim.go.clipboard = "unnamedplus"
