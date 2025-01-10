@@ -1,7 +1,7 @@
 local lazygit_group = vim.api.nvim_create_augroup('lazygit', { clear = true })
 
 -- TODO: make lazygit's `edit` command open in a new buffer, and
--- replace the laygit window with the new buffer
+--       replace the lazygit window with the new buffer
 
 local function spawn_git(cmd)-- {{{
   local buf_table = _helpers.lib.get_buf_table()
@@ -40,7 +40,6 @@ local function git_window(cmd)-- {{{
   spawn_git(cmd)
 end-- }}}
 
-bind('t', '<C-Esc>', '<C-\\><C-n>', { noremap = true })
 bind('n', '<leader>g', function() git_window('edit') end)
 bind('n', '<leader>G', function() git_window('vsplit') end)
 
@@ -58,12 +57,11 @@ vim.api.nvim_create_autocmd({"BufWinEnter", "WinEnter"}, {
   command = "startinsert",
 })
 
--- Only bind toggle key inside lazygit (prevents being able to open git inside toggleterm)
+-- Localize toggle to lazygit buffer (prevents opening git inside toggleterm)
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "term://*:lazygit",
   group = lazygit_group,
   callback = function(args)
     bind('t', '<leader>g', function() git_window('edit') end, { buffer = args.buf })
-    bind('t', '<leader>G', function() git_window('vsplit')end, { buffer = args.buf })
   end
 })

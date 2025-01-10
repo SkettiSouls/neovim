@@ -22,8 +22,11 @@ bind('n', '<A-j>', '<Cmd>resize +2<CR>', { noremap = true, silent = true })
 bind('n', '<A-k>', '<Cmd>resize -2<CR>', { noremap = true, silent = true })
 bind('n', '<A-l>', '<Cmd>vertical resize +2<CR>', { noremap = true, silent = true })
 
--- Save current buffer
-bind('n', '<leader>w', '<Cmd>w<CR>', { noremap = true, silent = true })
+-- Source current lua file
+bind('n', '<leader>s', '<Cmd>luafile %<CR>', { silent = true })
 
 -- Remove highlights
 bind('n', '<leader>h', '<Cmd>noh<CR>', { noremap = true, silent = true })
+
+-- Ctrl + Esc to exit terminal mode
+bind('t', '<C-Esc>', '<C-\\><C-n>', { noremap = true })
