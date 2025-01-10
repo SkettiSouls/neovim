@@ -9,5 +9,4 @@ local test_table = {-- {{{
     },
   },
 }
-flake.tests.table = test_table
--- }}}
+_helpers.tests.table = test_table-- }}}

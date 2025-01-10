@@ -5,8 +5,7 @@ local function gen_tabs(iter)-- {{{
   end
   return tabs
 end
-flake.lib.gen_tabs = gen_tabs
--- }}}
+_helpers.lib.gen_tabs = gen_tabs-- }}}
 
 local function parse_value(item, iter)-- {{{
   local iter = iter or 0
@@ -26,16 +25,14 @@ local function parse_value(item, iter)-- {{{
   end
   return value
 end
-flake.lib.parse_value = parse_value
--- }}}
+_helpers.lib.parse_value = parse_value-- }}}
 
 local function print_table(table)-- {{{
   for k, v in pairs(table) do
     print(tostring(k) .. " = " .. parse_value(v))
   end
 end
-flake.lib.print_table = print_table
--- }}}
+_helpers.lib.print_table = print_table-- }}}
 
 local function get_buf_table()-- {{{
   local buf_table = {}
@@ -45,7 +42,7 @@ local function get_buf_table()-- {{{
   end
   return buf_table
 end
-flake.lib.get_buf_table = get_buf_table-- }}}
+_helpers.lib.get_buf_table = get_buf_table-- }}}
 
 local function get_win_table()-- {{{
   local win_table = {}
@@ -57,7 +54,7 @@ local function get_win_table()-- {{{
   end
   return win_table
 end
-flake.lib.get_win_table = get_win_table-- }}}
+_helpers.lib.get_win_table = get_win_table-- }}}
 
 local function get_table_len(tbl)-- {{{
   local count = 0
@@ -66,4 +63,4 @@ local function get_table_len(tbl)-- {{{
   end
   return count
 end
-flake.lib.get_table_len = get_table_len-- }}}
+_helpers.lib.get_table_len = get_table_len-- }}}

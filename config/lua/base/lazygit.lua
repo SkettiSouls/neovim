@@ -4,7 +4,7 @@ local lazygit_group = vim.api.nvim_create_augroup('lazygit', { clear = true })
 -- replace the laygit window with the new buffer
 
 local function spawn_git(cmd)-- {{{
-  local buf_table = flake.lib.get_buf_table()
+  local buf_table = _helpers.lib.get_buf_table()
   for k, v in pairs(buf_table) do
     local git_buf = string.match(k, '^term://.*:lazygit')
     if buf_table[git_buf] ~= nil then
@@ -16,9 +16,9 @@ local function spawn_git(cmd)-- {{{
 end-- }}}
 
 local function git_window(cmd)-- {{{
-  local win_table = flake.lib.get_win_table()
+  local win_table = _helpers.lib.get_win_table()
   local current_buf = vim.api.nvim_buf_get_name(0)
-  local win_num = flake.lib.get_table_len(win_table)
+  local win_num = _helpers.lib.get_table_len(win_table)
 
   for buf, win in pairs(win_table) do
     local git_buf = string.match(buf, '^term://.*:lazygit')

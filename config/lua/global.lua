@@ -1,6 +1,6 @@
 bind = vim.keymap.set
 
-flake = {
+_helpers = {
   lib = {},
   tests = {},
 }
