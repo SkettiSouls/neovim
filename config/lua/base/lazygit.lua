@@ -22,12 +22,16 @@ function find_git()-- {{{
 end-- }}}
 
 -- Allows for one bind to close both window types
-local function bind_close(cmd)-- {{{
+local function bind_local(cmd)-- {{{
   local git_buf_name, _ = find_git()
   local git_buf = _helpers.lib.get_buf_table()[git_buf_name]
 
   -- We localize the keybind to the git buffer to prevent git opening in toggleterm.
   vim.keymap.set('t', '<leader>g', function() cmd() end, { buffer = git_buf })
+
+  -- Remove the `process exited 0` prompt
+  -- TODO? Find a way to bind this to q, without triggering in commit message.
+  vim.keymap.set('t', '<C-q>', function() vim.cmd('bdelete!') end, { buffer = git_buf })
 end-- }}}
 
 local function toggle_git_buf()-- {{{
@@ -45,7 +49,7 @@ local function toggle_git_buf()-- {{{
     vim.cmd.edit('term://lazygit')
   end
 
-  bind_close(toggle_git_buf)
+  bind_local(toggle_git_buf)
 end-- }}}
 
 local function toggle_git_split(open)-- {{{
@@ -59,7 +63,7 @@ local function toggle_git_split(open)-- {{{
     vim.cmd(open .. " term://lazygit")
   end
 
-  bind_close(toggle_git_split)
+  bind_local(toggle_git_split)
 end-- }}}
 
 bind('n', '<leader>g', function() toggle_git_buf() end)
