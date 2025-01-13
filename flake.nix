@@ -3,15 +3,29 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
+
+    wrapper-manager = {
+      url = "github:viperML/wrapper-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, flake-parts, ... }:
   flake-parts.lib.mkFlake { inherit inputs; }
-  ({ config, flake-parts-lib, ... }:
+  ({ config, flake-parts-lib, withSystem, ... }:
   {
     systems = import inputs.systems;
 
-    perSystem = { pkgs, ... }: {
+    perSystem = { pkgs, system, ... }: {
+      _module.args.pkgs = (import inputs.nixpkgs {
+        inherit system;
+        overlays = [
+          (final: prev: withSystem system ({ config, ... }: {
+            self = config.packages;
+          }))
+        ];
+      });
+
       packages = let
         inherit (pkgs)
           callPackage
@@ -60,7 +74,12 @@
             ${neovimWrapped}/bin/nvim "$@"
           '';
         };
-      };
+
+      } //
+      (inputs.wrapper-manager.lib.eval {
+        inherit pkgs;
+        modules = map (dir: ./wrappers/${dir}) (with builtins; attrNames (readDir ./wrappers));
+      }).config.build.packages;
     };
   });
 }

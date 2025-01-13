@@ -1,0 +1,10 @@
+git:
+  commit:
+    autoWrapCommitMessage: false
+  mainBranches:
+  - master
+  - main
+
+os:
+  editCommand: 'nvim'
+  editCommandTemplate: '{{editor}} --server /tmp/lazygit-server.pipe --remote-send "<C-\><C-n>:edit {{filename}}<cr>"'

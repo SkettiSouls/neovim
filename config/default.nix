@@ -12,4 +12,3 @@ stdenv.mkDerivation {
     cp -r $src $out
   '';
 }
-
