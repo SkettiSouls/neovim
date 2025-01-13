@@ -1,7 +1,8 @@
 local lazygit_group = vim.api.nvim_create_augroup('lazygit', { clear = true })
 
--- TODO: make lazygit's `edit` command open in a new buffer, and
---       replace the lazygit window with the new buffer
+-- We use the name used in vim/neovim
+local alternate_file = ""
+local git_open_method = ""
 
 -- Returns git_buf_name (nil or str), git_win_num (nil or int)
 function find_git()-- {{{
@@ -21,53 +22,59 @@ function find_git()-- {{{
   return nil, nil
 end-- }}}
 
--- Allows for one bind to close both window types
-local function bind_local(cmd)-- {{{
+local function close_lazygit_window()-- {{{
+  local _, git_win = find_git()
+
+  if git_open_method ~= 'buf' then
+    vim.cmd('close' .. tostring(git_win))
+  elseif vim.fn.expand('#') == "" then
+    vim.cmd.enew()
+  else
+    vim.cmd.edit(alternate_file)
+  end
+end-- }}}
+
+local function bind_local()-- {{{
   local git_buf_name, _ = find_git()
   local git_buf = _helpers.lib.get_buf_table()[git_buf_name]
 
-  -- We localize the keybind to the git buffer to prevent git opening in toggleterm.
-  vim.keymap.set('t', '<leader>g', function() cmd() end, { buffer = git_buf })
+  -- We localize the keybind to close the lazygit window in order to prevent git opening in other toggleterm.
+  vim.keymap.set('t', '<leader>g', function() close_lazygit_window() end, { buffer = git_buf })
 
-  -- Remove the `process exited 0` prompt
-  -- TODO? Find a way to bind this to q, without triggering in commit message.
+  -- Quit without the 'process exited 0' prompt, or when lazygit is hung (i.e. ran command without `; exit` at the end)
   vim.keymap.set('t', '<C-q>', function() vim.cmd('bdelete!') end, { buffer = git_buf })
 end-- }}}
 
-local function toggle_git_buf()-- {{{
-  local git_buf, git_win = find_git()
+function open_git_buf()-- {{{
+  local git_buf, _ = find_git()
+  alternate_file = vim.api.nvim_buf_get_name(0)
+  git_open_method = 'buf'
 
-  if git_win ~= nil then
-    if vim.fn.expand('#') == "" then
-      vim.cmd.enew()
-    else
-      vim.cmd.edit('#')
-    end
-  elseif git_buf ~= nil then
+  if git_buf ~= nil then
     vim.cmd.edit(git_buf)
   else
     vim.cmd.edit('term://lazygit')
   end
 
-  bind_local(toggle_git_buf)
+  bind_local()
 end-- }}}
 
-local function toggle_git_split(open)-- {{{
-  local git_buf, git_win = find_git()
+local function open_git_split(open)-- {{{
+  local git_buf, _ = find_git()
+  alternate_file = vim.api.nvim_buf_get_name(0)
+  git_open_method = open
 
-  if git_win ~= nil then
-    vim.cmd('close' .. tostring(git_win))
-  elseif git_buf ~= nil then
+  if git_buf ~= nil then
     vim.cmd(open .. " " .. git_buf)
   else
     vim.cmd(open .. " term://lazygit")
   end
 
-  bind_local(toggle_git_split)
+  bind_local()
 end-- }}}
 
-bind('n', '<leader>g', function() toggle_git_buf() end)
-bind('n', '<leader>G', function() toggle_git_split('vsplit') end)
+bind('n', '<leader>g', function() open_git_buf() end)
+bind('n', '<leader>G', function() open_git_split('vsplit') end)
 
 -- Remove line numbers from terminal windows
 vim.api.nvim_create_autocmd("TermOpen", {
