@@ -55,12 +55,3 @@ local function get_win_table()-- {{{
   return win_table
 end
 _helpers.lib.get_win_table = get_win_table-- }}}
-
-local function get_table_len(tbl)-- {{{
-  local count = 0
-  for _ in pairs(tbl) do
-    count = count + 1
-  end
-  return count
-end
-_helpers.lib.get_table_len = get_table_len-- }}}
