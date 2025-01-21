@@ -1,11 +1,16 @@
 local lazygit_group = vim.api.nvim_create_augroup('lazygit', { clear = true })
 
+-- Start lazygit server when file is loaded.
+if not vim.tbl_contains(vim.fn.serverlist(), '/tmp/lazygit-server.pipe') then
+  vim.fn.serverstart('/tmp/lazygit-server.pipe')
+end
+
 -- We use the name used in vim/neovim
 local alternate_file = ""
 local git_open_method = ""
 
 -- Returns git_buf_name (nil or str), git_win_num (nil or int)
-function find_git()-- {{{
+local function find_git()-- {{{
   local buf_table = _helpers.lib.get_buf_table()
   local win_table = _helpers.lib.get_win_table()
 
@@ -45,7 +50,7 @@ local function bind_local()-- {{{
   vim.keymap.set('t', '<C-q>', function() vim.cmd('bdelete!') end, { buffer = git_buf })
 end-- }}}
 
-function open_git_buf()-- {{{
+local function open_git_buf()-- {{{
   local git_buf, _ = find_git()
   alternate_file = vim.api.nvim_buf_get_name(0)
   git_open_method = 'buf'
@@ -89,3 +94,36 @@ vim.api.nvim_create_autocmd({"BufWinEnter", "WinEnter"}, {
   group = lazygit_group,
   command = "startinsert",
 })
+
+-- Prevent nested buffers in lazygit
+vim.api.nvim_create_user_command('LazygitEdit', function(tbl)
+  vim.cmd.edit(tbl.args)
+
+  local git_buf, _ = find_git()
+  local current_buf = vim.api.nvim_buf_get_number(0)
+
+  -- Prevent moving lazygit instance into the file it's editing. (e.g. open lazygit -> edit file -> open lazygit in file)
+  vim.keymap.del('n', '<leader>g')
+  vim.keymap.del('n', '<leader>G')
+  -- Trigger `QuitPre` event instead of moving lazygit. Writes for convenience.
+  vim.keymap.set('n', '<leader>g', function()
+    vim.cmd.write()
+    vim.cmd.quit()
+  end, { buffer = current_buf })
+
+  -- HACK: Return to lazygit when running `:q`
+  vim.api.nvim_create_autocmd('QuitPre', {
+    buffer = 0,
+    once = true,
+    group = lazygit_group,
+    callback = function()
+      -- Undo mapping changes
+      vim.keymap.del('n', '<leader>g', { buffer = current_buf })
+      vim.keymap.set('n', '<leader>g', function() open_git_buf() end)
+      vim.keymap.set('n', '<leader>G', function() open_git_split('vsplit') end)
+
+      vim.cmd('new ' .. git_buf)
+      vim.cmd.startinsert()
+    end
+  })
+end, { nargs = 1, desc = "Handle editing a file from inside lazygit" })

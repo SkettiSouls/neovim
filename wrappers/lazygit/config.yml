@@ -7,4 +7,4 @@ git:
 
 os:
   editCommand: 'nvim'
-  editCommandTemplate: '{{editor}} --server /tmp/lazygit-server.pipe --remote-send "<C-\><C-n>:edit {{filename}}<cr>"'
+  editCommandTemplate: '{{editor}} --server /tmp/lazygit-server.pipe --remote-send "<C-\><C-n>:LazygitEdit {{filename}}<cr>"'
