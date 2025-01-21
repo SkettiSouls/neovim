@@ -11,7 +11,6 @@ end
 setup_lsps({
   "gopls",
   "hls",
-  "nil_ls",
   "nushell",
   "rust_analyzer",
 })
