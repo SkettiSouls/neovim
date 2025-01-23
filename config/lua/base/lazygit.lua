@@ -2,12 +2,22 @@ local lazygit_group = vim.api.nvim_create_augroup('lazygit', { clear = true })
 
 -- Lazygit forces its' preset and template system on you unless you change your config, so to avoid requiring
 -- config changes we create a bash script in /tmp/luagit/<nvim_server> and disguise it as the vim binary in path.
-local server = string.gsub(vim.fn.serverlist()[1], '^.*/', '')
-local tmpdir = '/tmp/luagit/' .. server
+local lazygit_bridge = [[
+#!/usr/bin/env bash
+# Regular files will return two args: `--` `{{filename}}`, COMMIT_EDITMSG returns one: {{filename}}
+if [ ${1##*/} == "COMMIT_EDITMSG" ]; then
+  nvim $1 # Neovim lacks `--remote-wait`, so we have to let this nest.
+else
+  nvim --server ]] .. vim.fn.serverlist()[1] .. [[ --remote-send "<C-\><C-n>:LazygitEdit $2<cr>"
+fi
+]]
+
+local tmpdir = '/tmp/luagit/' .. string.gsub(vim.fn.serverlist()[1], '^.*/', '')
 local tmpfile = tmpdir .. '/vim'
 os.execute('mkdir -p ' .. tmpdir)
+
 local file = io.open(tmpfile, 'w')
-file:write('#!/usr/bin/env bash\nnvim --server ' .. vim.fn.serverlist()[1] .. ' --remote-send "<C-\\><C-n>:LazygitEdit $2<cr>"') -- $2 == file
+file:write(lazygit_bridge)
 file:flush()
 file:close()
 os.execute('chmod +x ' .. tmpfile)
@@ -101,6 +111,12 @@ vim.api.nvim_create_autocmd("TermOpen", {
 -- Always enter terminal mode when opening/switching to lazygit
 vim.api.nvim_create_autocmd({"BufWinEnter", "WinEnter"}, {
   pattern = "term://*:lazygit",
+  group = lazygit_group,
+  command = "startinsert",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gitcommit",
   group = lazygit_group,
   command = "startinsert",
 })
