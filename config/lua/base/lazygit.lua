@@ -1,9 +1,19 @@
 local lazygit_group = vim.api.nvim_create_augroup('lazygit', { clear = true })
 
--- Start lazygit server when file is loaded.
-if not vim.tbl_contains(vim.fn.serverlist(), '/tmp/lazygit-server.pipe') then
-  vim.fn.serverstart('/tmp/lazygit-server.pipe')
-end
+-- Lazygit forces its' preset and template system on you unless you change your config, so to avoid requiring
+-- config changes we create a bash script in /tmp/luagit/<nvim_server> and disguise it as the vim binary in path.
+local server = string.gsub(vim.fn.serverlist()[1], '^.*/', '')
+local tmpdir = '/tmp/luagit/' .. server
+local tmpfile = tmpdir .. '/vim'
+os.execute('mkdir -p ' .. tmpdir)
+local file = io.open(tmpfile, 'w')
+file:write('#!/usr/bin/env bash\nnvim --server ' .. vim.fn.serverlist()[1] .. ' --remote-send "<C-\\><C-n>:LazygitEdit $2<cr>"') -- $2 == file
+file:flush()
+file:close()
+os.execute('chmod +x ' .. tmpfile)
+
+vim.env.EDITOR = 'vim'
+vim.env.PATH = tmpdir .. ':' .. vim.env.PATH
 
 -- We use the name used in vim/neovim
 local alternate_file = ""
@@ -14,7 +24,7 @@ local function find_git()-- {{{
   local buf_table = _helpers.lib.get_buf_table()
   local win_table = _helpers.lib.get_win_table()
 
-  for k, _ in  pairs(buf_table) do
+  for k, _ in pairs(buf_table) do
     local git_buf = string.match(k, '^term://.*lazygit')
 
     if buf_table[git_buf] ~= nil and win_table[git_buf] ~= nil then
