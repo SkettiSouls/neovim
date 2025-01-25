@@ -126,7 +126,6 @@ vim.api.nvim_create_user_command('LazygitEdit', function(tbl)
   vim.cmd.edit(tbl.args)
 
   local git_buf, _ = find_git()
-  local current_buf = vim.api.nvim_buf_get_number(0)
 
   -- Prevent moving lazygit instance into the file it's editing. (e.g. open lazygit -> edit file -> open lazygit in file)
   vim.keymap.del('n', '<leader>g')
@@ -135,16 +134,15 @@ vim.api.nvim_create_user_command('LazygitEdit', function(tbl)
   vim.keymap.set('n', '<leader>g', function()
     vim.cmd.write()
     vim.cmd.quit()
-  end, { buffer = current_buf })
+  end)
 
   -- HACK: Return to lazygit when running `:q`
   vim.api.nvim_create_autocmd('QuitPre', {
-    buffer = 0,
     once = true,
     group = lazygit_group,
     callback = function()
       -- Undo mapping changes
-      vim.keymap.del('n', '<leader>g', { buffer = current_buf })
+      vim.keymap.del('n', '<leader>g')
       vim.keymap.set('n', '<leader>g', function() open_git_buf() end)
       vim.keymap.set('n', '<leader>G', function() open_git_split('vsplit') end)
 
