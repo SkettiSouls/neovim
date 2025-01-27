@@ -64,4 +64,12 @@ with vimPlugins; [
       hash = "sha256-ncFqBv0JITX3pTsLON+HctLUaKXhLRMBUrRWmI8KOSA=";
     };
   })
+
+  (buildVimPlugin {
+    pname = "luagit";
+    version = "unstable";
+    src = builtins.fetchGit {
+      url = "file:///home/skettisouls/Projects/luagit";
+    };
+  })
 ]
