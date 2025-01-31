@@ -64,4 +64,15 @@ with vimPlugins; [
       hash = "sha256-ncFqBv0JITX3pTsLON+HctLUaKXhLRMBUrRWmI8KOSA=";
     };
   })
+
+  (buildVimPlugin {
+    pname = "luagit";
+    version = "2024-01-31";
+    src = fetchFromGitHub {
+      owner = "SkettiSouls"; # :)
+      repo = "luagit";
+      rev = "b8bd717e146d506d09a49d54f90c9186e0fd44db";
+      hash = "sha256-ba6bd2uv5JGLBVCbxKdXyhwxGmejl9rKSBmWFUuy8tQ=";
+    };
+  })
 ]
