@@ -31,11 +31,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1739868632,
-        "narHash": "sha256-nV2sPPJ2FhRvpbGF6pLCg+6gmCCEH2pUm+nsxKETGbc=",
+        "lastModified": 1741426427,
+        "narHash": "sha256-w8+saHlqcjhEHeR0lstaYVrza0dy2/nQBWctZrOjeMg=",
         "ref": "refs/heads/master",
-        "rev": "0c759e28e2741bf8315e8ee87fcf26149130f75a",
-        "revCount": 8,
+        "rev": "27d2191faf0e49fc66eac71c8e37aa4a981f3b11",
+        "revCount": 9,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/luagit"
       },
