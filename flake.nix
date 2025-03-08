@@ -4,15 +4,24 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
 
+    luagit = {
+      url = "git+https://codeberg.org/skettisouls/luagit";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
+
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, flake-parts, ... }:
+  outputs = inputs @ { nixpkgs, flake-parts, ... }:
   flake-parts.lib.mkFlake { inherit inputs; }
-  ({ config, flake-parts-lib, withSystem, ... }:
+  ({ withSystem, ... }:
   {
     systems = import inputs.systems;
 
@@ -51,7 +60,7 @@
 
         # The stolen bit:
         neovimConfigs = callPackage ./config {};
-        neovimPlugins = callPackage ./plugins.nix {};
+        neovimPlugins = callPackage ./plugins.nix { luagit = inputs.luagit.packages.${system}.luagit; };
         neovimRuntime = callPackage ./runtime.nix {};
 
         resolvePaths = root: paths:  map (relpath: "${root}/${relpath}") paths;

@@ -18,6 +18,32 @@
         "type": "github"
       }
     },
+    "luagit": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1739868632,
+        "narHash": "sha256-nV2sPPJ2FhRvpbGF6pLCg+6gmCCEH2pUm+nsxKETGbc=",
+        "ref": "refs/heads/master",
+        "rev": "0c759e28e2741bf8315e8ee87fcf26149130f75a",
+        "revCount": 8,
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/luagit"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/luagit"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1731763621,
@@ -49,6 +75,7 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "luagit": "luagit",
         "nixpkgs": "nixpkgs",
         "systems": "systems",
         "wrapper-manager": "wrapper-manager"

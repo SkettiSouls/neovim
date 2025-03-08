@@ -1,6 +1,8 @@
-{ fetchFromGitHub
-, vimPlugins
-, vimUtils
+{
+  fetchFromGitHub,
+  vimPlugins,
+  vimUtils,
+  luagit,
 }:
 let
   inherit (vimUtils) buildVimPlugin;
@@ -14,6 +16,7 @@ with vimPlugins; [
   image-nvim                         # Render images in neovim
 
   ### Workflow ###
+  luagit                             # Integrate lazygit with buffers
   oil-nvim                           # Buffer like file management (mega based)
   direnv-vim                         # Direnv integration
   nvim-autopairs                     # Autopairs for '(' '[' '{'
@@ -62,17 +65,6 @@ with vimPlugins; [
       repo = "render-markdown.nvim";
       rev = "6fbd1491abc104409f119685de5353c35c97c005";
       hash = "sha256-ncFqBv0JITX3pTsLON+HctLUaKXhLRMBUrRWmI8KOSA=";
-    };
-  })
-
-  (buildVimPlugin {
-    pname = "luagit";
-    version = "2024-01-31";
-    src = fetchFromGitHub {
-      owner = "SkettiSouls"; # :)
-      repo = "luagit";
-      rev = "b8bd717e146d506d09a49d54f90c9186e0fd44db";
-      hash = "sha256-ba6bd2uv5JGLBVCbxKdXyhwxGmejl9rKSBmWFUuy8tQ=";
     };
   })
 ]
