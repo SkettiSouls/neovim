@@ -1,8 +1,9 @@
-local lspconfig = require('lspconfig')
+vim.lsp.enable('nixd')
 
-lspconfig.nixd.setup({
+vim.lsp.config['nixd'] = {
   cmd = { "nixd", "--inlay-hints=true", "--semantic-tokens=true" },
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+  root_markers = { "flake.nix" },
+  filetypes = { "nix" },
 
   settings = {
     nixd = {
@@ -17,4 +18,4 @@ lspconfig.nixd.setup({
       },
     },
   },
-})
+}

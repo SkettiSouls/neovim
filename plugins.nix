@@ -32,13 +32,7 @@ with vimPlugins; [
   markdown-preview-nvim              # Markdown preview in a browser tab
 
   ### LSP ###
-  nvim-lspconfig                     # Nvim lsp
-  nvim-cmp                           # Completion
-  cmp-nvim-lsp                       # Cmp source for nvim-lsp
-  cmp-buffer                         # Cmp source for buffer words
-  cmp-path                           # Cmp source for path
-  cmp-cmdline                        # Cmp source for vim cmd
-  cmp-vsnip                          # Cmp source for snippets
+  blink-cmp                          # Completion
   vim-vsnip                          # Snippet engine
   yuck-vim                           # Yuck syntax highlighting
   vim-nix                            # Nix niceties (i.e. indention)
