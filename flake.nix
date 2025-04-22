@@ -4,12 +4,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
 
-    luagit = {
-      url = "git+https://codeberg.org/skettisouls/luagit";
+    plugins = {
+      url = "git+https://codeberg.org/skettisouls/neovim-plugins";
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
       };
     };
 
@@ -60,7 +59,7 @@
 
         # The stolen bit:
         neovimConfigs = callPackage ./config {};
-        neovimPlugins = callPackage ./plugins.nix { luagit = inputs.luagit.packages.${system}.luagit; };
+        neovimPlugins = callPackage ./plugins.nix { luagit = inputs.plugins.packages.${system}.luagit; };
         neovimRuntime = callPackage ./runtime.nix {};
 
         resolvePaths = root: paths:  map (relpath: "${root}/${relpath}") paths;

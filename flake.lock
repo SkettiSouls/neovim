@@ -18,32 +18,6 @@
         "type": "github"
       }
     },
-    "luagit": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "systems": [
-          "systems"
-        ]
-      },
-      "locked": {
-        "lastModified": 1741430727,
-        "narHash": "sha256-r5ke+jvBV2NAYoriEB+gRD3A0mwuMO/4lwF4GoVB6fY=",
-        "ref": "refs/heads/master",
-        "rev": "236a0c67a3381e5182519bb63c11d8b7405aa86a",
-        "revCount": 10,
-        "type": "git",
-        "url": "https://codeberg.org/skettisouls/luagit"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://codeberg.org/skettisouls/luagit"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1744868846,
@@ -75,11 +49,34 @@
         "type": "github"
       }
     },
+    "plugins": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1745364747,
+        "narHash": "sha256-UNP2hUq4tFYe4L9gSm4iPIwr8hTzBKgcvDlJtZ9VCOg=",
+        "ref": "refs/heads/master",
+        "rev": "405aad5e252acc56d11d5ebbbd316582fea24648",
+        "revCount": 11,
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/neovim-plugins"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/neovim-plugins"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "luagit": "luagit",
         "nixpkgs": "nixpkgs",
+        "plugins": "plugins",
         "systems": "systems",
         "wrapper-manager": "wrapper-manager"
       }
