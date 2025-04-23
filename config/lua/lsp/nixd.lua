@@ -1,5 +1,3 @@
-vim.lsp.enable('nixd')
-
 vim.lsp.config['nixd'] = {
   cmd = { "nixd", "--inlay-hints=true", "--semantic-tokens=true" },
   root_markers = { "flake.nix" },
