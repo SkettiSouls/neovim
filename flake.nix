@@ -42,6 +42,7 @@
           writeShellApplication
           ;
 
+        inherit (inputs.plugins.packages.${system}) luagit;
         inherit (pkgs.lib) concatStringsSep;
 
         source = lang: dir:
@@ -59,7 +60,7 @@
 
         # The stolen bit:
         neovimConfigs = callPackage ./config {};
-        neovimPlugins = callPackage ./plugins.nix { luagit = inputs.plugins.packages.${system}.luagit; };
+        neovimPlugins = callPackage ./plugins.nix { inherit luagit; };
         neovimRuntime = callPackage ./runtime.nix {};
 
         resolvePaths = root: paths:  map (relpath: "${root}/${relpath}") paths;
