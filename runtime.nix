@@ -7,4 +7,5 @@ with pkgs; [
   nixd
   ripgrep
   tree-sitter
+  rust-analyzer
 ]
