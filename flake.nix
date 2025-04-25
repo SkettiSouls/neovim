@@ -31,7 +31,7 @@
       perSystem = { pkgs, system, ... }: let
         inherit (inputs.utils) readDirs;
 
-        config-files = pkgs.callPackage ./package.nix {};
+        config-files = pkgs.callPackage ./nix/package.nix {};
         paths = map (path: "${config-files}/${path}") (readDirs config-files);
 
         luaInit = pkgs.writeText "init.lua" ''
@@ -61,11 +61,11 @@
           inherit pkgs;
           modules = [{
             wrappers.neovim = {
-              pathAdd = pkgs.callPackage ./runtime.nix {};
+              pathAdd = pkgs.callPackage ./nix/runtime.nix {};
               basePackage = pkgs.wrapNeovim pkgs.neovim-unwrapped {
                 configure = {
                   customRC = vimInit;
-                  packages.all.start = pkgs.callPackage ./plugins.nix {};
+                  packages.all.start = pkgs.callPackage ./nix/plugins.nix {};
                 };
               };
             };

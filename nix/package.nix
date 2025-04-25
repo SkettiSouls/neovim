@@ -6,7 +6,7 @@ stdenvNoCC.mkDerivation {
 
   src = builtins.filterSource
     (path: type: baseNameOf path != "default.nix")
-    ./config;
+    ../config;
 
   installPhase = ''
     cp -r $src $out
