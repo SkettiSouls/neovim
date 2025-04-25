@@ -1,8 +1,7 @@
 {
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    systems.url = "github:nix-systems/default";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     plugins = {
       url = "git+https://codeberg.org/skettisouls/neovim-plugins";
@@ -12,83 +11,67 @@
       };
     };
 
+    utils = {
+      url = "git+https://codeberg.org/skettisouls/nix-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs @ { nixpkgs, flake-parts, ... }:
+  outputs = inputs@{ flake-parts, self, ... }:
   flake-parts.lib.mkFlake { inherit inputs; }
-  ({ withSystem, ... }:
   {
-    systems = import inputs.systems;
+    config = {
+      systems = [ "x86_64-linux" "aarch64-linux" ];
 
-    perSystem = { pkgs, system, ... }: {
-      _module.args.pkgs = (import inputs.nixpkgs {
-        inherit system;
-        overlays = [
-          (final: prev: withSystem system ({ config, ... }: {
-            self = config.packages;
-          }))
-        ];
-      });
+      perSystem = { pkgs, system, ... }: let
+        inherit (inputs.utils) readDirs;
 
-      packages = let
-        inherit (pkgs)
-          callPackage
-          neovim-unwrapped
-          wrapNeovim
-          writeShellApplication
-          ;
+        config-files = pkgs.callPackage ./package.nix {};
+        paths = map (path: "${config-files}/${path}") (readDirs config-files);
 
-        inherit (inputs.plugins.packages.${system}) luagit;
-        inherit (pkgs.lib) concatStringsSep;
+        luaInit = pkgs.writeText "init.lua" ''
+          -- init.lua goes here
+          bind = vim.keymap.set
+        '';
 
-        source = lang: dir:
-          resolvePaths
-            "${neovimConfigs}/${lang}/${dir}"
-            (with builtins; attrNames (readDir ./config/${lang}/${dir}))
-            ;
-
-        luaDirs = with builtins; attrNames (nixpkgs.lib.filterAttrs (_: v: v == "directory") (readDir ./config/lua));
-        luaFiles = nixpkgs.lib.flatten (map (dir: source "lua" dir) luaDirs);
-        # Load global.lua before all other files
-        luaInputs = (resolvePaths "${neovimConfigs}/lua" [ "global.lua" ]) ++ luaFiles;
-
-        vimInputs = [];
-
-        # The stolen bit:
-        neovimConfigs = callPackage ./config {};
-        neovimPlugins = callPackage ./plugins.nix { inherit luagit; };
-        neovimRuntime = callPackage ./runtime.nix {};
-
-        resolvePaths = root: paths:  map (relpath: "${root}/${relpath}") paths;
-        sourcedLuaConfigs = map (path: "luafile ${path}") luaInputs;
-        sourcedVimConfigs = map (path: "source ${path}") vimInputs;
-        sourcedConfigs = sourcedVimConfigs ++ sourcedLuaConfigs;
-        sourceString = concatStringsSep "\n" sourcedConfigs;
-
-        neovimWrapped = wrapNeovim neovim-unwrapped {
-          configure = {
-            customRC = sourceString;
-            packages.all.start = neovimPlugins;
-          };
-        };
+        vimInit = ''
+          " init.vim goes here
+          luafile ${luaInit}
+        '' + builtins.concatStringsSep "\n"
+          (map (path: "luafile ${path}") paths);
       in {
-        default = writeShellApplication {
-          name = "nvim";
-          runtimeInputs = neovimRuntime;
-          text = ''
-            ${neovimWrapped}/bin/nvim "$@"
-          '';
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [
+            (final: prev: {
+              vimPlugins = prev.vimPlugins // inputs.plugins.packages.${system};
+            })
+          ];
         };
 
-      } //
-      (inputs.wrapper-manager.lib.eval {
-        inherit pkgs;
-        modules = map (dir: ./wrappers/${dir}) (with builtins; attrNames (readDir ./wrappers));
-      }).config.build.packages;
+        packages = {
+          default = self.packages.${system}.neovim;
+        } //
+        (inputs.wrapper-manager.lib.eval {
+          inherit pkgs;
+          modules = [{
+            wrappers.neovim = {
+              pathAdd = pkgs.callPackage ./runtime.nix {};
+              basePackage = pkgs.wrapNeovim pkgs.neovim-unwrapped {
+                configure = {
+                  customRC = vimInit;
+                  packages.all.start = pkgs.callPackage ./plugins.nix {};
+                };
+              };
+            };
+          }];
+        }).config.build.packages;
+      };
     };
-  });
+  };
 }

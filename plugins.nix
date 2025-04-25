@@ -2,7 +2,6 @@
   fetchFromGitHub,
   vimPlugins,
   vimUtils,
-  luagit,
 }:
 let
   inherit (vimUtils) buildVimPlugin;

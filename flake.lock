@@ -20,16 +20,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1744868846,
-        "narHash": "sha256-5RJTdUHDmj12Qsv7XOhuospjAjATNiTMElplWnJE9Hs=",
+        "lastModified": 1744932701,
+        "narHash": "sha256-fusHbZCyv126cyArUwwKrLdCkgVAIaa/fQJYFlCEqiU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ebe4301cbd8f81c4f8d3244b3632338bbeb6d49c",
+        "rev": "b024ced1aac25639f8ca8fdfc2f8c4fbd66c48ef",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -77,23 +77,28 @@
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
         "plugins": "plugins",
-        "systems": "systems",
+        "utils": "utils",
         "wrapper-manager": "wrapper-manager"
       }
     },
-    "systems": {
+    "utils": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
+        "lastModified": 1745562574,
+        "narHash": "sha256-gInDE7AmDPcfjf0AqBNVhB6WLbK3app218ilDNSA3Ss=",
+        "ref": "refs/heads/master",
+        "rev": "8a0844d283dbe08a07319f1e81afc68968e6ab66",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/nix-utils"
       },
       "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/nix-utils"
       }
     },
     "wrapper-manager": {
