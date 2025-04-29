@@ -30,9 +30,7 @@
 
       perSystem = { pkgs, system, ... }: let
         inherit (inputs.utils) readDirs;
-
         config-files = pkgs.callPackage ./nix/package.nix {};
-        paths = map (path: "${config-files}/${path}") (readDirs config-files);
 
         luaInit = pkgs.writeText "init.lua" ''
           -- init.lua goes here
@@ -43,7 +41,7 @@
           " init.vim goes here
           luafile ${luaInit}
         '' + builtins.concatStringsSep "\n"
-          (map (path: "luafile ${path}") paths);
+          (map (path: "luafile ${path}") (readDirs config-files));
       in {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
