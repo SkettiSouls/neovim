@@ -29,7 +29,7 @@
       systems = [ "x86_64-linux" "aarch64-linux" ];
 
       perSystem = { pkgs, system, ... }: let
-        inherit (inputs.utils) readDirs;
+        inherit (inputs.utils.lib) readDirs;
         config-files = pkgs.callPackage ./nix/package.nix {};
 
         luaInit = pkgs.writeText "init.lua" ''

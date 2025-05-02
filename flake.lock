@@ -88,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745925578,
-        "narHash": "sha256-rGpDivpEUnfI7e03fnBc3NqTbybPMT3UOTRlEo0TSuA=",
+        "lastModified": 1746208499,
+        "narHash": "sha256-8UZsBTGkcSvERg3VfjXoQ2NztXz+BoCdoB/dpOfjSTE=",
         "ref": "refs/heads/master",
-        "rev": "95649e458d62877551115c92fa72239e13d9381f",
-        "revCount": 3,
+        "rev": "a008f43512b5ba00c3278859915ac765bdba3d53",
+        "revCount": 6,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/nix-utils"
       },
