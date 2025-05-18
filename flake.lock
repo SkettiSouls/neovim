@@ -59,11 +59,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745364747,
-        "narHash": "sha256-UNP2hUq4tFYe4L9gSm4iPIwr8hTzBKgcvDlJtZ9VCOg=",
+        "lastModified": 1747597133,
+        "narHash": "sha256-7B/l7m79Lsk/+3PswR+zznvvpASeTsXI9CjFT17pvDQ=",
         "ref": "refs/heads/master",
-        "rev": "405aad5e252acc56d11d5ebbbd316582fea24648",
-        "revCount": 11,
+        "rev": "d9221831679a6737faf39761894a85bf09a8ad41",
+        "revCount": 12,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim-plugins"
       },
@@ -88,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1746208499,
-        "narHash": "sha256-8UZsBTGkcSvERg3VfjXoQ2NztXz+BoCdoB/dpOfjSTE=",
+        "lastModified": 1746253915,
+        "narHash": "sha256-0TMNRM4VJlYD5qHW/sQPK1lugLx3QUvEajPCIRce+54=",
         "ref": "refs/heads/master",
-        "rev": "a008f43512b5ba00c3278859915ac765bdba3d53",
-        "revCount": 6,
+        "rev": "c9f113646360ce705bf4fde9b14c3a1dfc273064",
+        "revCount": 7,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/nix-utils"
       },
