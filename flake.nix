@@ -15,14 +15,9 @@
       url = "git+https://codeberg.org/skettisouls/nix-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    wrapper-manager = {
-      url = "github:viperML/wrapper-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs@{ flake-parts, self, ... }:
+  outputs = inputs@{ flake-parts, ... }:
   flake-parts.lib.mkFlake { inherit inputs; }
   {
     config = {
@@ -30,7 +25,11 @@
 
       perSystem = { pkgs, system, ... }: let
         inherit (inputs.utils.lib) readDirs;
-        config-files = pkgs.callPackage ./nix/package.nix {};
+        inherit (pkgs) callPackage wrapNeovimUnstable neovim-unwrapped;
+
+        plugins = callPackage ./nix/plugins.nix {};
+        runtimeDeps = callPackage ./nix/runtime.nix {};
+        config-files = callPackage ./nix/package.nix {};
 
         luaInit = pkgs.writeText "init.lua" ''
           -- init.lua goes here
@@ -42,6 +41,13 @@
           luafile ${luaInit}
         '' + builtins.concatStringsSep "\n"
           (map (path: "luafile ${path}") (readDirs config-files));
+
+        neovimWrapped = wrapNeovimUnstable neovim-unwrapped {
+          inherit plugins;
+          neovimRcContent = vimInit;
+        };
+
+        neovim = neovimWrapped.overrideAttrs (_: _: { inherit runtimeDeps; });
       in {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
@@ -53,22 +59,9 @@
         };
 
         packages = {
-          default = self.packages.${system}.neovim;
-        } //
-        (inputs.wrapper-manager.lib.eval {
-          inherit pkgs;
-          modules = [{
-            wrappers.neovim = {
-              pathAdd = pkgs.callPackage ./nix/runtime.nix {};
-              basePackage = pkgs.wrapNeovim pkgs.neovim-unwrapped {
-                configure = {
-                  customRC = vimInit;
-                  packages.all.start = pkgs.callPackage ./nix/plugins.nix {};
-                };
-              };
-            };
-          }];
-        }).config.build.packages;
+          inherit neovim;
+          default = neovim;
+        };
       };
     };
   };
