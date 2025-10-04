@@ -17,6 +17,7 @@ with vimPlugins; [
   ### Workflow ###
   luagit                             # Integrate lazygit with buffers
   oil-nvim                           # Buffer like file management (mega based)
+  oil-pushd-nvim                     # Adds pushd and popd for oil
   direnv-vim                         # Direnv integration
   nvim-autopairs                     # Autopairs for '(' '[' '{'
   comment-nvim                       # Commenting keybinds
