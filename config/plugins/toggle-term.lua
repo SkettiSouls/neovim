@@ -3,6 +3,7 @@ local toggleterm = require('toggleterm')
 toggleterm.setup {
   open_mapping = '<leader>t',
   direction = 'vertical',
+  persist_size = false,
   size = function(term)
     if term.direction == "horizontal" then
       return 15
