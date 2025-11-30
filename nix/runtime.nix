@@ -2,6 +2,7 @@
 with pkgs; [
   fzf
   git
+  gopls
   imagemagick
   lazygit
   nixd

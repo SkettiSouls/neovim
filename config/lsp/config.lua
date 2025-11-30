@@ -4,6 +4,7 @@ vim.diagnostic.config({
 })
 
 vim.lsp.enable({
+  'gopls',
   'nixd',
   'rust-analyzer'
 })
