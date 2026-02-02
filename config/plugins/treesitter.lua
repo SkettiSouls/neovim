@@ -1,8 +1,6 @@
-local tsconfigs = require('nvim-treesitter.configs')
+local parsers = require('nvim-treesitter.parsers')
 
-tsconfigs.setup {
-  -- Ensure highlighting
-  highlight = {
-    enable = true,
-  },
-}
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = vim.tbl_keys(parsers),
+  callback = function() vim.treesitter.start() end,
+})
