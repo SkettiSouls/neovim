@@ -1,10 +1,10 @@
 local builtin = require('telescope.builtin')
 local telescope = require('telescope')
 
-bind('n', 'ff', builtin.find_files)
-bind('n', 'fg', '<Cmd>Telescope grep_string search=<CR>')
-bind('n', 'fb', builtin.buffers)
-bind('n', 'fn', builtin.help_tags)
+vim.keymap.set('n', 'ff', builtin.find_files)
+vim.keymap.set('n', 'fg', '<Cmd>Telescope grep_string search=<CR>')
+vim.keymap.set('n', 'fb', builtin.buffers)
+vim.keymap.set('n', 'fn', builtin.help_tags)
 
 telescope.setup {
   extensions = {

@@ -3,7 +3,7 @@ local actions = require('oil.actions')
 local nav = require('oil.navigate')
 local telescope = require('telescope.builtin')
 
-bind('n', '-', "<cmd>Oil<cr>")
+vim.keymap.set('n', '-', "<cmd>Oil<cr>")
 
 local function bounce()-- {{{
   -- Jump to/from `$HOME`.

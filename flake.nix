@@ -1,7 +1,12 @@
 {
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    wrappers = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     plugins = {
       url = "git+https://codeberg.org/skettisouls/neovim-plugins";
@@ -11,44 +16,45 @@
       };
     };
 
-    utils = {
-      url = "git+https://codeberg.org/skettisouls/nix-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
+    plugins-direnv = {
+      url = "github:NotAShelf/direnv.nvim";
+      flake = false;
+    };
+
+    # Demo on fetching plugins from outside nixpkgs
+    plugins-lze = {
+      url = "github:BirdeeHub/lze";
+      flake = false;
+    };
+
+    # These 2 are already in nixpkgs, however this ensures you always fetch the most up to date version!
+    plugins-lzextras = {
+      url = "github:BirdeeHub/lzextras";
+      flake = false;
     };
   };
 
-  outputs = inputs@{ flake-parts, ... }:
+  outputs = inputs@{ flake-parts, nixpkgs, wrappers, ... }:
   flake-parts.lib.mkFlake { inherit inputs; }
+  (let
+    module = nixpkgs.lib.modules.importApply ./nix/module.nix inputs;
+    wrapper = wrappers.lib.evalModule module;
+  in
   {
     config = {
-      systems = [ "x86_64-linux" "aarch64-linux" ];
+      systems = nixpkgs.lib.platforms.all;
 
-      perSystem = { pkgs, system, ... }: let
-        inherit (inputs.utils.lib) readDirs;
-        inherit (pkgs) callPackage wrapNeovimUnstable neovim-unwrapped;
+      flake = {
+        wrappers.neovim = wrapper.config;
 
-        plugins = callPackage ./nix/plugins.nix {};
-        runtimeDeps = callPackage ./nix/runtime.nix {};
-        config-files = callPackage ./nix/package.nix {};
-
-        luaInit = pkgs.writeText "init.lua" ''
-          -- init.lua goes here
-          bind = vim.keymap.set
-        '';
-
-        vimInit = ''
-          " init.vim goes here
-          luafile ${luaInit}
-        '' + builtins.concatStringsSep "\n"
-          (map (path: "luafile ${path}") (readDirs config-files));
-
-        neovimWrapped = wrapNeovimUnstable neovim-unwrapped {
-          inherit plugins;
-          neovimRcContent = vimInit;
+        wrapperModules.neovim = module;
+        nixosModules.neovim = wrappers.lib.mkInstallModule {
+          name = "neovim";
+          value = module;
         };
+      };
 
-        neovim = neovimWrapped.overrideAttrs (_: _: { inherit runtimeDeps; });
-      in {
+      perSystem = { pkgs, system, ... }: {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [
@@ -58,11 +64,12 @@
           ];
         };
 
-        packages = {
-          inherit neovim;
+        packages = rec {
+          neovim-impure = wrapper.config.wrap { inherit pkgs; };
+          neovim = (neovim-impure.apply { settings.config_directory = ./.; }).wrap {};
           default = neovim;
         };
       };
     };
-  };
+  });
 }

@@ -1,53 +1,81 @@
-{
-  fetchFromGitHub,
-  vimPlugins,
-  vimUtils,
-}:
+{ config, pkgs, ... }:
 let
-  inherit (vimUtils) buildVimPlugin;
+  inherit (pkgs) vimPlugins;
+  inherit (pkgs.vimUtils) buildVimPlugin;
+  inherit (config.nvim-lib) neovimPlugins;
+
+  direnv-nvim = {
+    data = neovimPlugins.direnv;
+    name = "direnv-nvim";
+  };
+
+  oil-pushd-nvim = {
+    data = vimPlugins.oil-pushd-nvim;
+    after = [ "oil-nvim" ];
+  };
 in
-with vimPlugins; [
-  ### Rice ###
-  lualine-nvim                       # Status bar
-  vim-startify                       # Start screen
-  lspkind-nvim                       # Completion Type Icons
-  nvim-web-devicons                  # Dev Icons
-  image-nvim                         # Render images in neovim
-  render-markdown-nvim               # (Mostly) Renders markdown in normal mode
-
-  ### Workflow ###
-  luagit                             # Integrate lazygit with buffers
-  oil-nvim                           # Buffer like file management (mega based)
-  oil-pushd-nvim                     # Adds pushd and popd for oil
-  direnv-vim                         # Direnv integration
-  nvim-autopairs                     # Autopairs for '(' '[' '{'
-  comment-nvim                       # Commenting keybinds
-  toggleterm-nvim                    # Better terminal
-  vim-highlightedyank                # Highlights yanked region
-  vim-repeat                         # Allows for repeating plugin binds
-  vim-suda                           # Sudo password inside nvim
-  vim-surround                       # Keybinds for quickly changing surroundings
-  plenary-nvim                       # Dependency for a few things (lib)
-  telescope-nvim                     # NVim search engine
-  telescope-fzf-native-nvim          # Telescope's fzf rewrite
-  markdown-preview-nvim              # Markdown preview in a browser tab
-
-  ### LSP ###
-  blink-cmp                          # Completion
-  vim-vsnip                          # Snippet engine
-  yuck-vim                           # Yuck syntax highlighting
-  vim-nix                            # Nix niceties (i.e. indention)
-  nvim-treesitter.withAllGrammars    # Whatever treeshitter does man idk
-
-  # Lualine clock
-  (buildVimPlugin {
-    pname = "lualine-time";
-    version = "2024-03-04";
-    src = fetchFromGitHub {
-      owner = "archibate";
-      repo = "lualine-time";
-      rev = "71e368674ec59279e8429504074b15fecd758ea8";
-      hash = "sha256-5vZVku4btbwGaPPev+bkWG4R7hLavP5ixN4v/FyJb4c=";
+{
+  # TODO: Alternative to toggle-term and lualine clock
+  config.specs = {
+    core = {
+      extraPackages = with pkgs; [ git /* tree-sitter */ ];
+      data = with vimPlugins; [
+        plenary-nvim
+        nvim-treesitter.withAllGrammars
+        vim-suda
+      ];
     };
-  })
-]
+
+    editing = {
+      after = [ "core" ];
+      data = with vimPlugins; [
+        nvim-autopairs
+        comment-nvim
+        vim-repeat
+        vim-surround
+      ];
+    };
+
+    lsp = {
+      after = [ "core" "editing" "tree" "visuals" ];
+      extraPackages = with pkgs; [
+        lua-language-server
+        nixd
+        rust-analyzer
+      ];
+      data = with vimPlugins; [
+        blink-cmp
+        lazydev-nvim
+        nvim-lspconfig
+        vim-nix
+      ];
+    };
+
+    tree = {
+      after = [ "core" ];
+      extraPackages = with pkgs; [ ripgrep lazygit ];
+      data = with vimPlugins; [
+        direnv-nvim
+        luagit
+        oil-nvim
+        oil-pushd-nvim
+        telescope-nvim
+        telescope-fzf-native-nvim
+      ];
+    };
+
+    visuals = {
+      after = [ "core" "editing" "tree" ];
+      extraPackages = [ pkgs.imagemagick ];
+      data = with vimPlugins; [
+        lualine-nvim           # Status Bar
+        vim-startify           # Start Screen
+        lspkind-nvim           # Completion Type Icons
+        nvim-web-devicons      # Nerd Font Icons
+        image-nvim             # Image rendering
+        render-markdown-nvim   # Markdown rendering
+        markdown-preview-nvim  # Open Markdown File in Browser
+      ];
+    };
+  };
+}

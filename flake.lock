@@ -5,11 +5,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1743550720,
-        "narHash": "sha256-hIshGgKZCgWh6AYJpJmRgFdR3WUbkY04o82X05xqQiY=",
+        "lastModified": 1772408722,
+        "narHash": "sha256-rHuJtdcOjK7rAHpHphUb1iCvgkU3GpfvicLMwwnfMT0=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "c621e8422220273271f52058f618c94e405bb0f5",
+        "rev": "f20dc5d9b8027381c474144ecabc9034d6a839a3",
         "type": "github"
       },
       "original": {
@@ -20,27 +20,27 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1769789167,
-        "narHash": "sha256-kKB3bqYJU5nzYeIROI82Ef9VtTbu4uA3YydSk/Bioa8=",
+        "lastModified": 1772704124,
+        "narHash": "sha256-thXluFpTTSJDwkJXInd22dx+h9QyjlkcNlbd4bQf0aE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "62c8382960464ceb98ea593cb8321a2cf8f9e3e5",
+        "rev": "289c8a834fbf87af1f01cb78f479537ef5219a0b",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "nixpkgs-lib": {
       "locked": {
-        "lastModified": 1743296961,
-        "narHash": "sha256-b1EdN3cULCqtorQ4QeWgLMrd5ZGOjLSLemfa00heasc=",
+        "lastModified": 1772328832,
+        "narHash": "sha256-e+/T/pmEkLP6BHhYjx6GmwP5ivonQQn0bJdH9YrRB+Q=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "e4822aea2a6d1cdd36653c134cacfd64c97ff4fa",
+        "rev": "c185c7a5e5dd8f9add5b2f8ebeff00888b070742",
         "type": "github"
       },
       "original": {
@@ -59,17 +59,65 @@
         ]
       },
       "locked": {
-        "lastModified": 1759565544,
-        "narHash": "sha256-r7f6pEoby3Z8FBSu3eyKmK+ph1rV2M3GTLpsJg/6TsQ=",
+        "lastModified": 1759637824,
+        "narHash": "sha256-L8D/D/78zW1OBNPkWOlbJpqp3slRUsXN/GGDeofiS10=",
         "ref": "refs/heads/master",
-        "rev": "d8e5afb7ea8baf2983b094ee7973ff2ffcfcd6c3",
-        "revCount": 15,
+        "rev": "01a85591af8976e5d99aea111e2a2efcf3a184bf",
+        "revCount": 16,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim-plugins"
       },
       "original": {
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim-plugins"
+      }
+    },
+    "plugins-direnv": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769498531,
+        "narHash": "sha256-TlQ3oTRirUf/Po1KWCL4wDp8GgrJXzYWQx0C5qyZFeQ=",
+        "owner": "NotAShelf",
+        "repo": "direnv.nvim",
+        "rev": "9e58bb5e8db19d8bf2626de8e94a85fc305a8c1e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NotAShelf",
+        "repo": "direnv.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-lze": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772337062,
+        "narHash": "sha256-joi1087b2iDmwOHv7/0YCrDPucbu0osbS8WQmDYoyE4=",
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "rev": "f50a84a5d84f6b16e254091e755f5a9e839a9924",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "type": "github"
+      }
+    },
+    "plugins-lzextras": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772336997,
+        "narHash": "sha256-BsoZTfXpISPeTnTQWtnZkDXzvo9ocILB5IO2vU8IvAM=",
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "rev": "abdda956a2947d0617133a018992d035fc5781da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "type": "github"
       }
     },
     "root": {
@@ -77,27 +125,30 @@
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
         "plugins": "plugins",
-        "utils": "utils"
+        "plugins-direnv": "plugins-direnv",
+        "plugins-lze": "plugins-lze",
+        "plugins-lzextras": "plugins-lzextras",
+        "wrappers": "wrappers"
       }
     },
-    "utils": {
+    "wrappers": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1746253915,
-        "narHash": "sha256-0TMNRM4VJlYD5qHW/sQPK1lugLx3QUvEajPCIRce+54=",
-        "ref": "refs/heads/master",
-        "rev": "c9f113646360ce705bf4fde9b14c3a1dfc273064",
-        "revCount": 7,
-        "type": "git",
-        "url": "https://codeberg.org/skettisouls/nix-utils"
+        "lastModified": 1772774291,
+        "narHash": "sha256-2/ILO2+tAe0Pbb+wVp2Qiw7PTIs9afsc/MaAJI/ymC0=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "733053067a3a8baf96a7ba05e970b038105fd567",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://codeberg.org/skettisouls/nix-utils"
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "type": "github"
       }
     }
   },

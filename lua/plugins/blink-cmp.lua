@@ -6,6 +6,20 @@ blink.setup({
     ghost_text = { enabled = true }
   },
 
+  sources = {
+    per_filetype = {
+      lua = { inherit_defaults = true, 'lazydev' }
+    },
+
+    providers = {
+      lazydev = {
+        name = "LazyDev",
+        module = "lazydev.integrations.blink",
+        score_offset = 100,
+      }
+    }
+  },
+
   keymap = {
     preset = 'super-tab',
     ['<C-K>'] = { 'select_prev', 'fallback' },
