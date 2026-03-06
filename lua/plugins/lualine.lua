@@ -7,6 +7,13 @@ lualine.setup({
   },
 
   sections = {
+    lualine_x = {
+      function()
+        return require('direnv').statusline()
+      end,
+      -- 'fileformat',
+      'filetype'
+    },
     lualine_y = {
       -- 'progress',
       'location',
