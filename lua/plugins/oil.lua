@@ -5,14 +5,14 @@ local telescope = require('telescope.builtin')
 
 vim.keymap.set('n', '-', "<cmd>Oil<cr>")
 
-local function bounce()-- {{{
+local function bounce() -- {{{
   -- Jump to/from `$HOME`.
   if nav.stack[1] ~= vim.env.HOME then
     nav.pushd(vim.env.HOME)
   else
     nav.popd()
   end
-end-- }}}
+end -- }}}
 
 oil.setup({
   default_file_explorer = true,
@@ -33,11 +33,11 @@ oil.setup({
     ["cd"] = { bounce, desc = "Jump back and forth between $HOME and $PWD" },
 
     -- Telescope
-    ["ff"] = function()
+    ["<leader>ff"] = function()
       telescope.find_files({ cwd = oil.get_current_dir() })
     end,
 
-    ["fg"] = function()
+    ["<leader>fg"] = function()
       telescope.grep_string({
         cwd = oil.get_current_dir(),
         search = "",

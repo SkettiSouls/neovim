@@ -136,6 +136,9 @@ end)
 -- vim.keymap.set("x", "<leader>P", '"_dP', { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
 -- }}}
 
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Disable auto comment on enter
 vim.api.nvim_create_autocmd("FileType", {
   desc = "remove formatoptions",

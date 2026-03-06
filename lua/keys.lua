@@ -22,9 +22,9 @@ vim.keymap.set('n', '<A-j>', '<Cmd>resize +2<CR>', { noremap = true, silent = tr
 vim.keymap.set('n', '<A-k>', '<Cmd>resize -2<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-l>', '<Cmd>vertical resize +2<CR>', { noremap = true, silent = true })
 
-vim.keymap.set('n', '<space><space>x', '<Cmd>luafile %<CR>', { silent = true })
-vim.keymap.set("n", "<space>x", ":.lua<CR>")
-vim.keymap.set("v", "<space>x", ":lua<CR>")
+vim.keymap.set('n', '<leader><leader>x', '<Cmd>luafile %<CR>', { silent = true })
+vim.keymap.set("n", "<leader>x", ":.lua<CR>")
+vim.keymap.set("v", "<leader>x", ":lua<CR>")
 
 -- Remove highlights
 vim.keymap.set('n', '<leader>h', '<Cmd>noh<CR>', { noremap = true, silent = true })
