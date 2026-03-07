@@ -6,12 +6,8 @@ vim.keymap.set('n', '<leader>fg', '<Cmd>Telescope grep_string search=<CR>')
 vim.keymap.set('n', '<leader>fib', builtin.current_buffer_fuzzy_find)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags)
 
-local layout_config = {
-  prompt_position = "bottom"
-}
-
 telescope.setup({
-  defaults = require('plugins.telescope.ivy-bars'),
+  defaults = vim.tbl_extend('keep', require('plugins.telescope.ivy-bars'), {}),
   extensions = {
     fzf = {
       fuzzy = true,
