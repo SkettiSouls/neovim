@@ -1,5 +1,6 @@
 local builtin = require('telescope.builtin')
 local telescope = require('telescope')
+require('plugins.telescope.ivy-bars')
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files)
 vim.keymap.set('n', '<leader>fg', '<Cmd>Telescope grep_string search=<CR>')
@@ -7,7 +8,9 @@ vim.keymap.set('n', '<leader>fib', builtin.current_buffer_fuzzy_find)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags)
 
 telescope.setup({
-  defaults = vim.tbl_extend('keep', require('plugins.telescope.ivy-bars'), {}),
+  defaults = {
+    layout_strategy = "ivybars",
+  },
   extensions = {
     fzf = {
       fuzzy = true,
