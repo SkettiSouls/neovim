@@ -156,6 +156,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- TODO: Add ways to get root if LSP isn't active
+function find_root()
+  local lsp_root = vim.lsp.buf.list_workspace_folders()[1]
+  if lsp_root then
+    return lsp_root
+  end
+end
+
 -- TODO: Make better
 require('lspconfig')
 require('rules')

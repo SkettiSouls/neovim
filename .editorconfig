@@ -1,3 +1,3 @@
-[*.{lua,nix,sh}]
+[*.{lua,nix,sh,json}]
 indent_style = space
 indent_size = 2

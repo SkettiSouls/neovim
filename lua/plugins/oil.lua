@@ -1,7 +1,6 @@
 local oil = require('oil')
 local actions = require('oil.actions')
 local nav = require('oil.navigate')
-local telescope = require('telescope.builtin')
 
 vim.keymap.set('n', '-', "<cmd>Oil<cr>")
 
@@ -31,17 +30,5 @@ oil.setup({
     ["gd"] = { nav.pushd, desc = "Push directory to stack and jump" },
     ["gD"] = { nav.popd, desc = "Pop current directory off stack and jump backwards" },
     ["cd"] = { bounce, desc = "Jump back and forth between $HOME and $PWD" },
-
-    -- Telescope
-    ["<leader>ff"] = function()
-      telescope.find_files({ cwd = oil.get_current_dir() })
-    end,
-
-    ["<leader>fg"] = function()
-      telescope.grep_string({
-        cwd = oil.get_current_dir(),
-        search = "",
-      })
-    end,
   },
 })
