@@ -19,3 +19,11 @@ vim.opt.shiftwidth = 4
 
 -- Prompt for sudo password in read-only files
 vim.g.suda_smart_edit = 1
+
+-- Make searching case insensitive unless query contains a capital
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- Render special characters
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
