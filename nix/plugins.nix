@@ -45,7 +45,6 @@ in
       ];
       data = with vimPlugins; [
         blink-cmp
-        lazydev-nvim
         nvim-lspconfig
         vim-nix
       ];

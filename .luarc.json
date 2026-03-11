@@ -1,0 +1,23 @@
+{
+  "runtime": {
+    "version": "LuaJIT",
+    "settings": {
+	"path": [
+	    "?.lua",
+	    "?/init.lua"
+	]
+    }
+  },
+  "workspace": {
+    "ignoreDir": [
+      ".git",
+      ".direnv",
+      "result",
+      "nix",
+    ],
+    "library": [
+      "$VIMRUNTIME/lua",
+      "${3rd}/luv/library",
+    ]
+  }
+}

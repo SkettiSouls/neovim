@@ -1,11 +1,3 @@
--- Configures LuaLS for NeoVim
-require('lazydev').setup({
-  library = {
-    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-  }
-})
-
-
 vim.diagnostic.config({
   virtual_lines = { current_line = true },
   virtual_text = true, -- TODO: Figure out how to hide on current line
