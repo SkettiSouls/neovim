@@ -15,7 +15,7 @@ let
   };
 in
 {
-  # TODO: Alternative to toggle-term and lualine clock
+  # TODO: Alternative to and lualine clock
   config.specs = {
     core = {
       extraPackages = with pkgs; [ git /* tree-sitter */ ];

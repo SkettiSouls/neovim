@@ -17,6 +17,3 @@ vim.keymap.set("v", "<leader>x", ":lua<CR>")
 
 -- Clear search highlights
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Ctrl + Esc to exit terminal mode
-vim.keymap.set('t', '<C-Esc>', '<C-\\><C-n>')
