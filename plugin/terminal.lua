@@ -1,5 +1,5 @@
--- Ctrl+Esc to exit terminal mode
-vim.keymap.set('t', '<C-Esc>', '<C-\\><C-n>')
+-- Set a separate leader for terminal mode to prevent delayed keypresses
+vim.g.termleader = '<C-Space>'
 
 local state = {
   buf = -1,
@@ -9,7 +9,7 @@ local state = {
 local function spawn(buf)
   buf = buf or nil
   if not vim.api.nvim_buf_is_valid(buf) then
-    buf = vim.api.nvim_create_buf(false, true)
+    buf = vim.api.nvim_create_buf(false, false)
   end
 
   local wincfg = {
@@ -19,22 +19,25 @@ local function spawn(buf)
     height = math.ceil(vim.o.lines * 0.4),
     col = 0,
     row = vim.o.lines,
-    border = { '', '', '', '', '', '', '', '' }
   }
 
   local win = vim.api.nvim_open_win(buf, true, wincfg)
   return { buf = buf, win = win }
 end
 
+
 local function toggle()
+  local mapping = function()
+    vim.api.nvim_feedkeys('', 'x', true)
+    toggle()
+  end
+
   if not vim.api.nvim_win_is_valid(state.win) then
     state = spawn(state.buf)
     if vim.bo[state.buf].buftype ~= "terminal" then
       vim.cmd.terminal()
-      vim.keymap.set('t', '\\t', function() -- \t to prevent spaces being funky
-        vim.api.nvim_feedkeys('', 'x', true)
-        toggle()
-      end, { buffer = true })
+      vim.keymap.set('t', vim.g.termleader .. 't', mapping, { buffer = true })
+      vim.keymap.set('t', vim.g.termleader .. '<C-t>', mapping, { buffer = true }) -- Handle accidentally holding Ctrl
     end
     vim.cmd.startinsert()
   else
@@ -43,4 +46,7 @@ local function toggle()
 end
 
 vim.api.nvim_create_user_command("ToggleTerm", toggle, {})
+
+-- Ctrl+Esc to exit terminal mode
+vim.keymap.set('t', '<C-Esc>', '<C-\\><C-n>')
 vim.keymap.set('n', '<leader>t', toggle)
