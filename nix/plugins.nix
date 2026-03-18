@@ -15,10 +15,9 @@ let
   };
 in
 {
-  # TODO: Alternative to and lualine clock
   config.specs = {
     core = {
-      extraPackages = with pkgs; [ git /* tree-sitter */ ];
+      extraPackages = with pkgs; [ git ];
       data = with vimPlugins; [
         plenary-nvim
         nvim-treesitter.withAllGrammars
@@ -29,8 +28,8 @@ in
     editing = {
       after = [ "core" ];
       data = with vimPlugins; [
-        nvim-autopairs
         comment-nvim
+        nvim-autopairs
         vim-repeat
         vim-surround
       ];
