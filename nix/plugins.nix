@@ -42,7 +42,6 @@ in
         lua-language-server
         nixd
         rust-analyzer
-        (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
       ];
       data = with vimPlugins; [
         blink-cmp
