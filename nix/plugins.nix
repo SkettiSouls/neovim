@@ -69,8 +69,6 @@ in
       data = with vimPlugins; [
         lualine-nvim           # Status Bar
         vim-startify           # Start Screen
-        lspkind-nvim           # Completion Type Icons
-        nvim-web-devicons      # Nerd Font Icons
         image-nvim             # Image rendering
         render-markdown-nvim   # Markdown rendering
         markdown-preview-nvim  # Open Markdown File in Browser

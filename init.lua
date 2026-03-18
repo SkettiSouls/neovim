@@ -120,4 +120,3 @@ function find_root()
 end
 
 vim.cmd('runtime! lua/config/*.lua')
-require('lsp.config')
