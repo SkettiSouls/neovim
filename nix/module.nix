@@ -44,18 +44,6 @@ inputs: { config, wlib, lib, pkgs, ... }:
   };
 
   config = {
-    specs.lze = [
-      config.nvim-lib.neovimPlugins.lze
-      {
-        data = config.nvim-lib.neovimPlugins.lzextras;
-        name = "lzextras";
-      }
-    ];
-
-    # These are from the tips and tricks section of the neovim wrapper docs!
-    # https://birdeehub.github.io/nix-wrapper-modules/neovim.html#tips-and-tricks
-    # We could put these in another module and import them here instead!
-
     # This submodule modifies both levels of your specs
     specMods =
       {

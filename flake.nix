@@ -8,6 +8,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     plugins = {
       url = "git+https://codeberg.org/skettisouls/neovim-plugins";
       inputs = {
@@ -43,21 +48,13 @@
   {
     config = {
       systems = nixpkgs.lib.platforms.all;
-
-      flake = {
-        wrappers.neovim = wrapper.config;
-
-        wrapperModules.neovim = module;
-        nixosModules.neovim = wrappers.lib.mkInstallModule {
-          name = "neovim";
-          value = module;
-        };
-      };
+      flake.wrappers.neovim = wrapper.config;
 
       perSystem = { pkgs, system, ... }: {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [
+            inputs.rust-overlay.overlays.default
             (final: prev: {
               vimPlugins = prev.vimPlugins // inputs.plugins.packages.${system};
             })

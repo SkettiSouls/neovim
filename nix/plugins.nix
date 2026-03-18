@@ -42,6 +42,7 @@ in
         lua-language-server
         nixd
         rust-analyzer
+        (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
       ];
       data = with vimPlugins; [
         blink-cmp
@@ -49,6 +50,14 @@ in
         vim-nix
       ];
     };
+
+    lze = [
+      config.nvim-lib.neovimPlugins.lze
+      {
+        data = config.nvim-lib.neovimPlugins.lzextras;
+        name = "lzextras";
+      }
+    ];
 
     tree = {
       after = [ "core" ];
