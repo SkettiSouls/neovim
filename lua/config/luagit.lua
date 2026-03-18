@@ -6,6 +6,7 @@ vim.keymap.set('n', '<leader>G', function() luagit.open('vsplit') end)
 
 luagit.setup({
   insert_on_focus = true,
+  terminal_map = vim.g.termleader .. 'g',
   open_mapping = '<leader>g',
   open_method = 'replace',
   prevent_nesting = true,

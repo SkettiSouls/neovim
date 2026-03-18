@@ -91,6 +91,8 @@ end) -- }}}
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+-- Set a separate leader for terminal mode to prevent delayed keypresses
+vim.g.termleader = '<C-Space>'
 
 -- Disable auto comment on enter
 vim.api.nvim_create_autocmd("FileType", {
@@ -117,18 +119,5 @@ function find_root()
   end
 end
 
--- TODO: Make better
-require('lspconfig')
-require('rules')
-require('keys')
-require('plugins.oil')
-require('plugins.blink-cmp')
-require('plugins.auto-pairs')
-require('plugins.comment')
-require('plugins.images')
-require('plugins.luagit')
-require('plugins.lualine')
-require('plugins.markdown')
-require('plugins.telescope')
-require('plugins.treesitter')
-require('plugins.direnv')
+vim.cmd('runtime! lua/config/*.lua')
+require('lsp.config')

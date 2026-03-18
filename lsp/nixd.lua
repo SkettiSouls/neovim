@@ -1,4 +1,4 @@
-vim.lsp.config['nixd'] = {
+return {
   cmd = { "nixd", "--inlay-hints=true", "--semantic-tokens=true" },
   root_markers = { "flake.nix" },
   filetypes = { "nix" },

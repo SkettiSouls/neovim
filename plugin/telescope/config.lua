@@ -1,6 +1,5 @@
 local builtin = require('telescope.builtin')
 local telescope = require('telescope')
-require('plugins.telescope.ivybars')
 
 -- Use oil current dir when in oil
 local function oil_aware_picker(func, opts)

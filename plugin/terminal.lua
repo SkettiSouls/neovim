@@ -1,6 +1,3 @@
--- Set a separate leader for terminal mode to prevent delayed keypresses
-vim.g.termleader = '<C-Space>'
-
 local state = {
   buf = -1,
   win = -1
