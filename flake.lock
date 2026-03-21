@@ -59,11 +59,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773555341,
-        "narHash": "sha256-OUKKqndk4TKTaXKkymtb9OpdL4dpWdNJkZAW5SuqkIE=",
+        "lastModified": 1774089683,
+        "narHash": "sha256-IAcIT5elJc9ZGnAIaVRofAUlVO5MopKmQdar9Rjqb/c=",
         "ref": "refs/heads/master",
-        "rev": "ed48f4750b481fe83cce4dbcd4ea2136af6eac35",
-        "revCount": 17,
+        "rev": "4c32f67a0b63cee68872dd3e66f331207a055a37",
+        "revCount": 21,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim-plugins"
       },
