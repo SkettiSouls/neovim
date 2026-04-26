@@ -15,6 +15,9 @@ local pmclock = function()
     hour = hour - 12
     suffix = "PM"
   end
+  if hour == '00' then
+    hour = '12'
+  end
   return hour .. os.date(':%M ') .. suffix
 end
 
