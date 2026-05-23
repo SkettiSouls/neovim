@@ -66,16 +66,16 @@ inputs: { config, wlib, lib, pkgs, ... }:
         # config.runtimeDeps = lib.mkDefault (parentSpec.runtimeDeps or false);
         # config.pluginDeps = lib.mkDefault (parentSpec.pluginDeps or false);
         # or something more interesting like:
-        # add an extraPackages field to the specs themselves
-        options.extraPackages = lib.mkOption {
+        # add an runtimePkgs field to the specs themselves
+        options.runtimePkgs = lib.mkOption {
           type = lib.types.listOf wlib.types.stringable;
           default = [ ];
-          description = "a extraPackages spec field to put packages to suffix to the PATH";
+          description = "a runtimePkgs spec field to put packages to suffix to the PATH";
         };
         # You could do this too
         # config.before = lib.mkDefault [ "INIT_MAIN" ];
       };
 
-    extraPackages = config.specCollect (acc: v: acc ++ (v.extraPackages or [ ])) [ ];
+    runtimePkgs = config.specCollect (acc: v: acc ++ (v.runtimePkgs or [ ])) [ ];
   };
 }

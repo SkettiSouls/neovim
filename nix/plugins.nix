@@ -17,7 +17,7 @@ in
 {
   config.specs = {
     core = {
-      extraPackages = with pkgs; [ git ];
+      runtimePkgs = with pkgs; [ git ];
       data = with vimPlugins; [
         plenary-nvim
         nvim-treesitter.withAllGrammars
@@ -37,7 +37,7 @@ in
 
     lsp = {
       after = [ "core" "editing" "tree" "visuals" ];
-      extraPackages = with pkgs; [
+      runtimePkgs = with pkgs; [
         lua-language-server
         nixd
         rust-analyzer
@@ -59,7 +59,7 @@ in
 
     tree = {
       after = [ "core" ];
-      extraPackages = with pkgs; [ ripgrep lazygit ];
+      runtimePkgs = with pkgs; [ ripgrep lazygit ];
       data = with vimPlugins; [
         direnv-nvim
         luagit
@@ -72,7 +72,7 @@ in
 
     visuals = {
       after = [ "core" "editing" "tree" ];
-      extraPackages = [ pkgs.imagemagick ];
+      runtimePkgs = [ pkgs.imagemagick ];
       data = with vimPlugins; [
         lualine-nvim           # Status Bar
         vim-startify           # Start Screen

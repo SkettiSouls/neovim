@@ -48,6 +48,7 @@
       perSystem = { pkgs, system, ... }: {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
+          config.allowUnfree = true;
           overlays = [
             (final: prev: {
               vimPlugins = prev.vimPlugins // inputs.plugins.packages.${system};
