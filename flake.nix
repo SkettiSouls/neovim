@@ -58,7 +58,7 @@
 
         packages = rec {
           neovim-impure = wrapper.config.wrap { inherit pkgs; };
-          neovim = (neovim-impure.apply { settings.config_directory = ./.; }).wrap {};
+          neovim = neovim-impure.wrap { settings.config_directory = ./.; };
           default = neovim;
         };
       };
